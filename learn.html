@@ -17,9 +17,12 @@
     }
 
     #letter {
-      font-size: 120px;
+      font-size: 60vw; /* 🔥 makes it HUGE and responsive */
       font-weight: bold;
-      margin-bottom: 40px;
+      line-height: 1;
+      text-align: center;
+      margin-bottom: 30px;
+      user-select: none;
     }
 
     .buttons {
@@ -28,18 +31,13 @@
     }
 
     button {
-      padding: 10px 20px;
+      padding: 12px 24px;
       font-size: 18px;
       cursor: pointer;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       background: #007bff;
       color: white;
-    }
-
-    button:disabled {
-      background: #aaa;
-      cursor: not-allowed;
     }
   </style>
 </head>
@@ -57,26 +55,22 @@
     let index = 0;
 
     const letterEl = document.getElementById("letter");
-    const prevBtn = document.getElementById("prev");
-    const nextBtn = document.getElementById("next");
 
     function updateView() {
       letterEl.textContent = letters[index];
-      prevBtn.disabled = index === 0;
-      nextBtn.disabled = index === letters.length - 1;
     }
 
-    prevBtn.onclick = () => {
-      if (index > 0) index--;
+    document.getElementById("prev").onclick = () => {
+      index = (index - 1 + letters.length) % letters.length;
       updateView();
     };
 
-    nextBtn.onclick = () => {
-      if (index < letters.length - 1) index++;
+    document.getElementById("next").onclick = () => {
+      index = (index + 1) % letters.length;
       updateView();
     };
 
-    // Swipe / drag support
+    // Swipe support
     let startX = 0;
 
     document.addEventListener("touchstart", (e) => {
@@ -84,8 +78,7 @@
     });
 
     document.addEventListener("touchend", (e) => {
-      let endX = e.changedTouches[0].clientX;
-      handleSwipe(startX, endX);
+      handleSwipe(startX, e.changedTouches[0].clientX);
     });
 
     document.addEventListener("mousedown", (e) => {
@@ -93,17 +86,16 @@
     });
 
     document.addEventListener("mouseup", (e) => {
-      let endX = e.clientX;
-      handleSwipe(startX, endX);
+      handleSwipe(startX, e.clientX);
     });
 
     function handleSwipe(start, end) {
       const diff = start - end;
 
-      if (diff > 50 && index < letters.length - 1) {
-        index++; // swipe left → next
-      } else if (diff < -50 && index > 0) {
-        index--; // swipe right → prev
+      if (diff > 50) {
+        index = (index + 1) % letters.length;
+      } else if (diff < -50) {
+        index = (index - 1 + letters.length) % letters.length;
       }
 
       updateView();
