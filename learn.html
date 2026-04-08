@@ -66,72 +66,79 @@
     <button id="next">Next</button>
   </div>
 
-  <script>
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-    let index = 0;
+ <script>
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  let index = 0;
 
-    const letterEl = document.getElementById("letter");
+  const letterEl = document.getElementById("letter");
 
-    function getRandomColor() {
-      const letters = "0123456789ABCDEF";
-      let color = "#";
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
+  // Generate LIGHT background color
+  function getLightColor() {
+    const r = Math.floor(200 + Math.random() * 55);
+    const g = Math.floor(200 + Math.random() * 55);
+    const b = Math.floor(200 + Math.random() * 55);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
 
-    function updateView() {
-      letterEl.textContent = letters[index];
+  // Generate DARK letter color
+  function getDarkColor() {
+    const r = Math.floor(Math.random() * 100);
+    const g = Math.floor(Math.random() * 100);
+    const b = Math.floor(Math.random() * 100);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
 
-      // 🎨 random colors
-      document.body.style.background = getRandomColor();
-      letterEl.style.color = getRandomColor();
-    }
+  function updateView() {
+    letterEl.textContent = letters[index];
 
-    document.getElementById("prev").onclick = () => {
-      index = (index - 1 + letters.length) % letters.length;
-      updateView();
-    };
+    // 🎨 Apply colors
+    document.body.style.background = getLightColor();
+    letterEl.style.color = getDarkColor();
+  }
 
-    document.getElementById("next").onclick = () => {
+  document.getElementById("prev").onclick = () => {
+    index = (index - 1 + letters.length) % letters.length;
+    updateView();
+  };
+
+  document.getElementById("next").onclick = () => {
+    index = (index + 1) % letters.length;
+    updateView();
+  };
+
+  // Swipe support
+  let startX = 0;
+
+  document.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    handleSwipe(startX, e.changedTouches[0].clientX);
+  });
+
+  document.addEventListener("mousedown", (e) => {
+    startX = e.clientX;
+  });
+
+  document.addEventListener("mouseup", (e) => {
+    handleSwipe(startX, e.clientX);
+  });
+
+  function handleSwipe(start, end) {
+    const diff = start - end;
+
+    if (diff > 50) {
       index = (index + 1) % letters.length;
-      updateView();
-    };
-
-    // Swipe support
-    let startX = 0;
-
-    document.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-    });
-
-    document.addEventListener("touchend", (e) => {
-      handleSwipe(startX, e.changedTouches[0].clientX);
-    });
-
-    document.addEventListener("mousedown", (e) => {
-      startX = e.clientX;
-    });
-
-    document.addEventListener("mouseup", (e) => {
-      handleSwipe(startX, e.clientX);
-    });
-
-    function handleSwipe(start, end) {
-      const diff = start - end;
-
-      if (diff > 50) {
-        index = (index + 1) % letters.length;
-      } else if (diff < -50) {
-        index = (index - 1 + letters.length) % letters.length;
-      }
-
-      updateView();
+    } else if (diff < -50) {
+      index = (index - 1 + letters.length) % letters.length;
     }
 
     updateView();
-  </script>
+  }
+
+  updateView();
+</script>
 
 </body>
 </html>
