@@ -1,0 +1,3282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobile-First Recruitment Platform — Presentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      user-select: none;
+    }
+
+    #outer-wrapper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #slide-scale-wrapper {
+      position: absolute;
+      transform-origin: top left;
+    }
+
+    #slide-frame {
+      width: 1280px;
+      height: 720px;
+      border: none;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+      background: #f8fafc;
+    }
+
+    /* ── Navigation Buttons ── */
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.25);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      z-index: 9999;
+      outline: none;
+      backdrop-filter: blur(6px);
+    }
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.28);
+      border-color: rgba(255,255,255,0.5);
+    }
+    .nav-btn:active {
+      transform: translateY(-50%) scale(0.92);
+    }
+    .nav-btn:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    #prev-btn { left: 16px; }
+    #next-btn { right: 16px; }
+
+    /* ── Bottom Bar ── */
+    #bottom-bar {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 9999;
+    }
+
+    #dot-nav {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: all 0.25s;
+      flex-shrink: 0;
+    }
+    .dot:hover { background: rgba(255,255,255,0.6); }
+    .dot.active {
+      background: #60a5fa;
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    #slide-counter {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Loading overlay ── */
+    #loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15,23,42,0.7);
+      z-index: 100;
+      border-radius: 8px;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    #loading.hidden { opacity: 0; }
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: #60a5fa;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Hidden slide HTML sources -->
+<textarea class="slide-data" id="slide-0" style="display:none"><!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"/> <meta content="width=device-width, initial-scale=1.0" name="viewport"/> <title>Mobile-First Recruitment Platform</title> <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/> <script src="https://cdn.tailwindcss.com"></script> <style> body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; } .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); } .slide-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px; } .hero-card { background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); padding: 48px 64px; max-width: 1000px; width: 100%; } .title { font-family: 'Poppins', sans-serif; font-size: 42px; font-weight: 700; color: #1e293b; margin-bottom: 8px; } .subtitle { font-size: 24px; color: #64748b; margin-bottom: 32px; } .tagline { font-size: 28px; font-weight: 600; color: #0f172a; margin-bottom: 40px; } .value-props { display: flex; gap: 32px; justify-content: center; margin-top: 24px; } .prop-item { display: flex; align-items: center; gap: 12px; } .prop-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; } .prop-icon.green { background: #dcfce7; color: #166534; } .prop-icon.blue { background: #dbeafe; color: #1e40af; } .prop-icon.purple { background: #f3e8ff; color: #7c3aed; } .prop-text { font-size: 16px; font-weight: 600; color: #1e293b; } .prop-sub { font-size: 14px; color: #64748b; } .footer { margin-top: 40px; display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid #e2e8f0; } .date { font-size: 14px; color: #64748b; } .badge { background: #f1f5f9; padding: 6px 16px; border-radius: 20px; font-size: 14px; color: #475569; } </style> </head> <body> <div class="slide-container"> <div class="slide-content"> <div class="hero-card"> <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;"> <i class="fas fa-users" style="font-size: 32px; color: #3b82f6;"></i> <span style="font-size: 18px; font-weight: 600; color: #64748b;">Recruitment Platform MVP</span> </div> <div class="title">Mobile-First Recruitment Platform</div> <div class="subtitle">Hire smarter. Faster. Cheaper.</div> <div class="tagline"> <span style="color: #3b82f6;">Budget-friendly</span> • <span style="color: #10b981;">Simple UX</span> • <span style="color: #8b5cf6;">Mobile-first</span> </div> <div class="value-props"> <div class="prop-item"> <div class="prop-icon green"> <i class="fas fa-mobile-alt"></i> </div> <div> <div class="prop-text">Mobile First</div> <div class="prop-sub">React Native app</div> </div> </div> <div class="prop-item"> <div class="prop-icon blue"> <i class="fas fa-bolt"></i> </div> <div> <div class="prop-text">Fast &amp; Simple</div> <div class="prop-sub">No clutter UX</div> </div> </div> <div class="prop-item"> <div class="prop-icon purple"> <i class="fas fa-dollar-sign"></i> </div> <div> <div class="prop-text">Cost Effective</div> <div class="prop-sub">Cheaper than competitors</div> </div> </div> </div> <div class="footer"> <div class="date">April 9, 2026</div> <div class="badge">MVP Launch in 4-6 weeks</div> </div> </div> </div> </div> </body> </html> </textarea>
+<textarea class="slide-data" id="slide-1" style="display:none"><!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"/> <meta content="width=device-width, initial-scale=1.0" name="viewport"/> <title>Problem &amp; Opportunity</title> <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/> <style> body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; } .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); } .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; } .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; } .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; } .header-icon i { color: white; font-size: 24px; } .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; } .content { display: flex; gap: 32px; flex: 1; } .left-col { flex: 1; display: flex; flex-direction: column; gap: 16px; } .right-col { flex: 1; display: flex; flex-direction: column; gap: 16px; } .card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px; border: 1px solid #e2e8f0; box-sizing: border-box; } .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; } .card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; } .card-icon.employer { background: #fee2e2; color: #dc2626; } .card-icon.seeker { background: #dbeafe; color: #2563eb; } .card-title { font-size: 16px; font-weight: 600; color: #1e293b; } .pain-points { display: flex; flex-direction: column; gap: 8px; } .pain-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px; border-radius: 8px; background: #f8fafc; } .pain-icon { color: #ef4444; margin-top: 2px; } .pain-text { font-size: 14px; color: #475569; line-height: 1.4; } .opportunity-card { background: linear-gradient(135deg, #dbeafe, #bfdbfe); border: 1px solid #93c5fd; } .opportunity-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; } .opportunity-icon { width: 40px; height: 40px; background: #2563eb; border-radius: 10px; display: flex; align-items: center; justify-content: center; } .opportunity-icon i { color: white; font-size: 20px; } .opportunity-title { font-size: 18px; font-weight: 700; color: #1e3a8a; } .stats { display: flex; gap: 16px; margin-top: 16px; } .stat-item { flex: 1; text-align: center; padding: 12px; background: white; border-radius: 8px; box-sizing: border-box; } .stat-value { font-size: 24px; font-weight: 700; color: #1e40af; } .stat-label { font-size: 12px; color: #64748b; } .highlight { background: #fef3c7; padding: 2px 6px; border-radius: 4px; color: #92400e; } </style> </head> <body> <div class="slide-container"> <div class="slide-content"> <div class="header"> <div class="header-icon"> <i class="fas fa-search"></i> </div> <div class="header-title">Problem &amp; Opportunity</div> </div> <div class="content"> <div class="left-col"> <div class="card"> <div class="card-header"> <div class="card-icon employer"> <i class="fas fa-building"></i> </div> <div class="card-title">Employer Pain Points</div> </div> <div class="pain-points"> <div class="pain-item"> <i class="fas fa-times-circle pain-icon"></i> <div class="pain-text"><strong>Expensive ATS</strong> - Current solutions cost $1000+/month</div> </div> <div class="pain-item"> <i class="fas fa-times-circle pain-icon"></i> <div class="pain-text"><strong>Cluttered tools</strong> - Complex interfaces slow hiring</div> </div> <div class="pain-item"> <i class="fas fa-times-circle pain-icon"></i> <div class="pain-text"><strong>Slow mobile workflows</strong> - 70% of hiring happens on mobile</div> </div> <div class="pain-item"> <i class="fas fa-times-circle pain-icon"></i> <div class="pain-text"><strong>Poor candidate matching</strong> - Low quality applicants</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon seeker"> <i class="fas fa-user"></i> </div> <div class="card-title">Job Seeker Pain Points</div> </div> <div class="pain-points"> <div class="pain-item"> <i class="fas fa-times-circle pain-icon"></i> <div class="pain-text"><strong>Complex forms</strong> - 5+ steps to apply</div> </div> <div class="pain-item"> <i class="fas fa-times-circle pain-icon"></i> <div class="pain-text"><strong>Poor mobile UX</strong> - 60% drop-off on mobile</div> </div> <div class="pain-item"> <i class="fas fa-times-circle pain-icon"></i> <div class="pain-text"><strong>Low transparency</strong> - No application status</div> </div> </div> </div> </div> <div class="right-col"> <div class="card opportunity-card"> <div class="opportunity-header"> <div class="opportunity-icon"> <i class="fas fa-lightbulb"></i> </div> <div class="opportunity-title">Market Opportunity</div> </div> <div style="font-size: 14px; color: #1e3a8a; margin-bottom: 16px; line-height: 1.35;"> <strong>Lightweight, affordable, mobile-first marketplace</strong> with high apply conversion rates </div> <div class="stats"> <div class="stat-item"> <div class="stat-value">$12B</div> <div class="stat-label">Recruitment Market</div> </div> <div class="stat-item"> <div class="stat-value">45%</div> <div class="stat-label">Mobile Usage</div> </div> <div class="stat-item"> <div class="stat-value">3x</div> <div class="stat-label">Conversion Potential</div> </div> </div> </div> <div class="card"> <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;"> <i class="fas fa-chart-line" style="color: #3b82f6; font-size: 20px;"></i> <div style="font-size: 16px; font-weight: 600; color: #1e293b;">Key Insights</div> </div> <div style="font-size: 14px; color: #475569; line-height: 1.6;"> • <span class="highlight">70%</span> of job searches happen on mobile<br/> • Current platforms have <span class="highlight">60% drop-off</span> rates<br/> • SMBs need <span class="highlight">affordable solutions</span><br/> • <span class="highlight">AI matching</span> can improve quality by 3x </div> </div> </div> </div> </div> </div></body> </html> </textarea>
+<textarea class="slide-data" id="slide-2" style="display:none"><!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"/> <meta content="width=device-width, initial-scale=1.0" name="viewport"/> <title>Project Overview</title> <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/> <style> body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; } .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); } .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; } .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; } .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; } .header-icon i { color: white; font-size: 24px; } .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; } .content { display: flex; gap: 32px; flex: 1; } .left-col { flex: 1; display: flex; flex-direction: column; gap: 16px; } .right-col { flex: 1; display: flex; flex-direction: column; gap: 16px; } .card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px; border: 1px solid #e2e8f0; box-sizing: border-box; } .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; } .card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; } .card-icon.overview { background: #dbeafe; color: #2563eb; } .card-icon.mvp { background: #dcfce7; color: #166534; } .card-title { font-size: 16px; font-weight: 600; color: #1e293b; } .platform-desc { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 12px; } .mvp-tenets { display: flex; gap: 16px; margin-top: 12px; } .tenet-item { flex: 1; text-align: center; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; } .tenet-icon { font-size: 20px; margin-bottom: 8px; } .tenet-icon.budget { color: #10b981; } .tenet-icon.ux { color: #3b82f6; } .tenet-icon.mobile { color: #8b5cf6; } .tenet-text { font-size: 13px; font-weight: 600; color: #1e293b; } .tenet-sub { font-size: 12px; color: #64748b; } .focus-areas { display: flex; flex-direction: column; gap: 12px; } .focus-item { display: flex; align-items: center; gap: 12px; padding: 8px 12px; background: #f8fafc; border-radius: 8px; } .focus-check { color: #10b981; font-size: 16px; } .focus-text { font-size: 14px; color: #475569; } .focus-status { margin-left: auto; font-size: 12px; color: #64748b; } .highlight { background: #fef3c7; padding: 2px 6px; border-radius: 4px; color: #92400e; } </style> </head> <body> <div class="slide-container"> <div class="slide-content"> <div class="header"> <div class="header-icon"> <i class="fas fa-bullseye"></i> </div> <div class="header-title">Project Overview</div> </div> <div class="content"> <div class="left-col"> <div class="card"> <div class="card-header"> <div class="card-icon overview"> <i class="fas fa-info-circle"></i> </div> <div class="card-title">Platform Description</div> </div> <div class="platform-desc"> <strong>Build a recruitment platform where employers post jobs and manage applicants; job seekers create profiles and apply quickly.</strong> Focus on budget-friendly, simple UX, and mobile-first experience. </div> <div style="font-size: 13px; color: #475569; line-height: 1.5; padding-left: 2px;"> • <span class="highlight">Employers</span>: Post jobs, search candidates, manage applications<br/> • <span class="highlight">Job Seekers</span>: Search/apply for jobs, manage profiles<br/> • <span class="highlight">Mobile-first</span>: React Native app for iOS/Android </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon mvp"> <i class="fas fa-rocket"></i> </div> <div class="card-title">MVP Tenets</div> </div> <div class="mvp-tenets"> <div class="tenet-item"> <div class="tenet-icon budget"><i class="fas fa-dollar-sign"></i></div> <div class="tenet-text">Budget-friendly</div> <div class="tenet-sub">Cheaper than competitors</div> </div> <div class="tenet-item"> <div class="tenet-icon ux"><i class="fas fa-smile"></i></div> <div class="tenet-text">Simple UX</div> <div class="tenet-sub">No clutter</div> </div> <div class="tenet-item"> <div class="tenet-icon mobile"><i class="fas fa-mobile-alt"></i></div> <div class="tenet-text">Mobile-first</div> <div class="tenet-sub">React Native</div> </div> </div> </div> </div> <div class="right-col"> <div class="card"> <div class="card-header"> <div class="card-icon overview"> <i class="fas fa-list-check"></i> </div> <div class="card-title">Phase 1 Focus Areas</div> </div> <div class="focus-areas"> <div class="focus-item"> <i class="fas fa-check-circle focus-check"></i> <div class="focus-text">Job posting and management</div> <div class="focus-status">Core</div> </div> <div class="focus-item"> <i class="fas fa-check-circle focus-check"></i> <div class="focus-text">Job search and filters</div> <div class="focus-status">Core</div> </div> <div class="focus-item"> <i class="fas fa-check-circle focus-check"></i> <div class="focus-text">Apply flow with resume upload</div> <div class="focus-status">Core</div> </div> <div class="focus-item"> <i class="fas fa-check-circle focus-check"></i> <div class="focus-text">Basic candidate tracking</div> <div class="focus-status">Core</div> </div> <div class="focus-item"> <i class="fas fa-clock focus-check" style="color: #f59e0b;"></i> <div class="focus-text">Notifications (Email/Push)</div> <div class="focus-status">Later</div> </div> </div> </div> </div> </div> </div> </div> </body> </html>
+</textarea>
+<textarea class="slide-data" id="slide-3" style="display:none"><!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"/> <meta content="width=device-width, initial-scale=1.0" name="viewport"/> <title>Target Users</title> <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/> <style> body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; } .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); } .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; } .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; } .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; } .header-icon i { color: white; font-size: 24px; } .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; } .content { display: flex; gap: 32px; flex: 1; } .left-col { flex: 1; display: flex; flex-direction: column; gap: 16px; } .right-col { flex: 1; display: flex; flex-direction: column; gap: 16px; } .card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px; border: 1px solid #e2e8f0; box-sizing: border-box; } .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; } .card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; } .card-icon.employer { background: #fee2e2; color: #dc2626; } .card-icon.seeker { background: #dbeafe; color: #2563eb; } .card-title { font-size: 16px; font-weight: 600; color: #1e293b; } .user-list { display: flex; flex-direction: column; gap: 12px; } .user-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; } .user-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; } .user-avatar.employer { background: #ef4444; } .user-avatar.seeker { background: #3b82f6; } .user-info { flex: 1; } .user-name { font-size: 14px; font-weight: 600; color: #1e293b; } .user-role { font-size: 12px; color: #64748b; } .user-status { font-size: 12px; padding: 4px 8px; border-radius: 12px; } .user-status.active { background: #dcfce7; color: #166534; } .user-status.pending { background: #fef3c7; color: #92400e; } .needs-section { margin-top: 16px; } .needs-title { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 8px; } .needs-list { display: flex; flex-wrap: wrap; gap: 8px; } .need-tag { font-size: 12px; padding: 4px 12px; background: #f1f5f9; border-radius: 12px; color: #475569; } .need-tag.highlight { background: #dbeafe; color: #1e40af; } .stats { display: flex; gap: 16px; margin-top: 16px; } .stat-item { flex: 1; text-align: center; padding: 12px; background: #f8fafc; border-radius: 8px; } .stat-value { font-size: 20px; font-weight: 700; color: #1e293b; } .stat-label { font-size: 12px; color: #64748b; } </style> </head> <body> <div class="slide-container"> <div class="slide-content"> <div class="header"> <div class="header-icon"> <i class="fas fa-users"></i> </div> <div class="header-title">Target Users</div> </div> <div class="content"> <div class="left-col"> <div class="card"> <div class="card-header"> <div class="card-icon employer"> <i class="fas fa-building"></i> </div> <div class="card-title">Employers</div> </div> <div class="user-list"> <div class="user-item"> <div class="user-avatar employer"> <i class="fas fa-user-tie"></i> </div> <div class="user-info"> <div class="user-name">HR Teams</div> <div class="user-role">Large enterprises, recruitment agencies</div> </div> <div class="user-status active">Active</div> </div> <div class="user-item"> <div class="user-avatar employer"> <i class="fas fa-rocket"></i> </div> <div class="user-info"> <div class="user-name">Startup Founders</div> <div class="user-role">Early-stage companies, tech startups</div> </div> <div class="user-status active">Active</div> </div> <div class="user-item"> <div class="user-avatar employer"> <i class="fas fa-store"></i> </div> <div class="user-info"> <div class="user-name">SMBs</div> <div class="user-role">Small &amp; mid-size companies</div> </div> <div class="user-status active">Active</div> </div> </div> <div class="needs-section"> <div class="needs-title">Key Needs:</div> <div class="needs-list"> <div class="need-tag highlight">Fast hiring</div> <div class="need-tag">Cost effective</div> <div class="need-tag">Easy to use</div> <div class="need-tag">Mobile access</div> </div> </div> </div> </div> <div class="right-col"> <div class="card"> <div class="card-header"> <div class="card-icon seeker"> <i class="fas fa-user"></i> </div> <div class="card-title">Job Seekers</div> </div> <div class="user-list"> <div class="user-item"> <div class="user-avatar seeker"> <i class="fas fa-graduation-cap"></i> </div> <div class="user-info"> <div class="user-name">Freshers</div> <div class="user-role">Recent graduates, entry-level</div> </div> <div class="user-status active">Active</div> </div> <div class="user-item"> <div class="user-avatar seeker"> <i class="fas fa-briefcase"></i> </div> <div class="user-info"> <div class="user-name">Experienced Professionals</div> <div class="user-role">3+ years experience</div> </div> <div class="user-status active">Active</div> </div> <div class="user-item"> <div class="user-avatar seeker"> <i class="fas fa-laptop"></i> </div> <div class="user-info"> <div class="user-name">Freelancers</div> <div class="user-role">Remote workers, contractors</div> </div> <div class="user-status pending">Future</div> </div> </div> <div class="needs-section"> <div class="needs-title">Key Needs:</div> <div class="needs-list"> <div class="need-tag highlight">Simple application</div> <div class="need-tag">Mobile-first</div> <div class="need-tag">Quick apply</div> <div class="need-tag">Status tracking</div> </div> </div> </div> </div> </div> <div class="stats"> <div class="stat-item"> <div class="stat-value">85%</div> <div class="stat-label">Mobile users</div> </div> <div class="stat-item"> <div class="stat-value">60%</div> <div class="stat-label">SMBs</div> </div> <div class="stat-item"> <div class="stat-value">25%</div> <div class="stat-label">Startups</div> </div> </div> </div> </div> </body> </html> </textarea>
+<textarea class="slide-data" id="slide-4" style="display:none"><!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"/> <meta content="width=device-width, initial-scale=1.0" name="viewport"/> <title>Core Features — Employers</title> <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/> <style> body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; } .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); } .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; } .header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; } .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; } .header-icon i { color: white; font-size: 24px; } .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; } .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex: 1; } .card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 16px; border: 1px solid #e2e8f0; box-sizing: border-box; display: flex; flex-direction: column; min-height: 175px; } .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; } .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; } .card-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); } .card-icon.green { background: linear-gradient(135deg, #10b981, #059669); } .card-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); } .card-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); } .card-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); } .card-title { font-size: 15px; font-weight: 600; color: #1e293b; } .card-desc { font-size: 13px; color: #64748b; line-height: 1.4; margin-top: 4px; } .feature-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; } .feature-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #475569; } .feature-check { color: #10b981; font-size: 12px; } .status-badge { margin-left: auto; font-size: 11px; padding: 2px 8px; border-radius: 10px; flex-shrink: 0; } .status-badge.active { background: #dcfce7; color: #166534; } .status-badge.pending { background: #fef3c7; color: #92400e; } .bottom-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid #e2e8f0; } .stats { display: flex; gap: 24px; } .stat-item { display: flex; align-items: center; gap: 8px; } .stat-value { font-size: 18px; font-weight: 700; color: #1e293b; } .stat-label { font-size: 13px; color: #64748b; } .progress-bar { width: 100px; height: 6px; background: #e2e8f0; border-radius: 3px; margin-top: 4px; } .progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #2563eb); border-radius: 3px; } </style> </head> <body> <div class="slide-container"> <div class="slide-content"> <div class="header"> <div class="header-icon"> <i class="fas fa-building"></i> </div> <div class="header-title">Core Features — Employers</div> </div> <div class="grid"> <div class="card"> <div class="card-header"> <div class="card-icon blue"> <i class="fas fa-user-plus"></i> </div> <div class="card-title">Signup/Login</div> </div> <div class="card-desc">Secure authentication with email/OTP, social login options, and role-based access control</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Email/OTP verification</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Social login (Google, LinkedIn)</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon green"> <i class="fas fa-building"></i> </div> <div class="card-title">Company Profile</div> </div> <div class="card-desc">Create and manage company profiles with logo, description, and contact information</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Company details &amp; logo</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Contact information</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon purple"> <i class="fas fa-bullhorn"></i> </div> <div class="card-title">Post Jobs</div> </div> <div class="card-desc">Create job listings with title, description, salary, location, and requirements</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Job details &amp; requirements</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Salary &amp; location</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon orange"> <i class="fas fa-users"></i> </div> <div class="card-title">View Applicants</div> </div> <div class="card-desc">Manage and track all applicants for your job postings with detailed profiles</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Applicant profiles</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Application status</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon blue"> <i class="fas fa-file-download"></i> </div> <div class="card-title">Download Resumes</div> </div> <div class="card-desc">Download candidate resumes in PDF/DOC format directly from the platform</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>PDF/DOC support</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Resume preview</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon green"> <i class="fas fa-filter"></i> </div> <div class="card-title">Filter Candidates</div> </div> <div class="card-desc">Filter and search candidates by skills, experience, location, and other criteria</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Advanced filters</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Search by skills</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon purple"> <i class="fas fa-envelope"></i> </div> <div class="card-title">Contact Candidates</div> </div> <div class="card-desc">Direct messaging system to communicate with potential candidates</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Direct messaging</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Email notifications</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon orange"> <i class="fas fa-toggle-on"></i> </div> <div class="card-title">Manage Job Status</div> </div> <div class="card-desc">Control job posting status (open/closed) and manage visibility settings</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Open/close jobs</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Visibility settings</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon red"> <i class="fas fa-bell"></i> </div> <div class="card-title">Notifications</div> </div> <div class="card-desc">Get notified about new applications, messages, and important updates</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Push notifications</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Email alerts</span> <div class="status-badge active">Active</div> </div> </div> </div> </div> <div class="bottom-bar"> <div class="stats"> <div class="stat-item"> <div class="stat-value">9</div> <div class="stat-label">Features</div> </div> <div class="stat-item"> <div class="stat-value">100%</div> <div class="stat-label">Active</div> </div> <div class="stat-item"> <div class="stat-value">4.8</div> <div class="stat-label">Rating</div> </div> </div> <div style="font-size: 13px; color: #64748b;"> <i class="fas fa-info-circle" style="margin-right: 8px;"></i> All features are currently active and available </div> </div> </div> </div> </body> </html> </textarea>
+<textarea class="slide-data" id="slide-5" style="display:none"><!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"/> <meta content="width=device-width, initial-scale=1.0" name="viewport"/> <title>Core Features — Job Seekers</title> <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/> <style> body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; } .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); } .slide-content { position: absolute; inset: 0; padding: 40px 60px 24px 60px; display: flex; flex-direction: column; box-sizing: border-box; } .header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; } .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center; } .header-icon i { color: white; font-size: 24px; } .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; } .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; flex: 1; align-content: start; } .card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 16px; border: 1px solid #e2e8f0; box-sizing: border-box; display: flex; flex-direction: column; min-height: 176px; } .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; } .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; } .card-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); } .card-icon.green { background: linear-gradient(135deg, #10b981, #059669); } .card-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); } .card-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); } .card-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); } .card-icon.teal { background: linear-gradient(135deg, #14b8a6, #0d9488); } .card-icon.pink { background: linear-gradient(135deg, #ec4899, #db2777); } .card-title { font-size: 15px; font-weight: 600; color: #1e293b; } .card-desc { font-size: 13px; color: #64748b; line-height: 1.4; margin-top: 4px; } .feature-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; } .feature-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #475569; } .feature-check { color: #10b981; font-size: 12px; } .feature-item span { white-space: nowrap; } .status-badge { margin-left: auto; font-size: 11px; padding: 2px 8px; border-radius: 10px; flex-shrink: 0; } .status-badge.active { background: #dcfce7; color: #166534; } .status-badge.pending { background: #fef3c7; color: #92400e; } .bottom-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0; } .stats { display: flex; gap: 24px; } .stat-item { display: flex; align-items: center; gap: 8px; } .stat-value { font-size: 18px; font-weight: 700; color: #1e293b; } .stat-label { font-size: 13px; color: #64748b; } </style> </head> <body> <div class="slide-container"> <div class="slide-content"> <div class="header"> <div class="header-icon"> <i class="fas fa-user"></i> </div> <div class="header-title">Core Features — Job Seekers</div> </div> <div class="grid"> <div class="card"> <div class="card-header"> <div class="card-icon blue"> <i class="fas fa-user-plus"></i> </div> <div class="card-title">Signup/Login</div> </div> <div class="card-desc">Secure authentication with email/OTP, social login, and profile creation</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Email/OTP verification</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Social login (Google, LinkedIn)</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon green"> <i class="fas fa-id-card"></i> </div> <div class="card-title">Profile Creation</div> </div> <div class="card-desc">Create detailed profiles with skills, experience, education, and portfolio</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Skills &amp; experience</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Education history</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon purple"> <i class="fas fa-file-upload"></i> </div> <div class="card-title">Upload Resume</div> </div> <div class="card-desc">Upload resume in PDF/DOC format directly to AWS S3 storage</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>PDF/DOC support</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Direct S3 upload</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon orange"> <i class="fas fa-search"></i> </div> <div class="card-title">Job Search &amp; Filters</div> </div> <div class="card-desc">Search jobs by location, salary, skills, and filter by industry</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Advanced filters</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Location-based search</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon teal"> <i class="fas fa-hand-pointer"></i> </div> <div class="card-title">1-Tap Apply</div> </div> <div class="card-desc">Apply to jobs instantly with pre-filled profile and resume</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>One-click application</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Pre-filled details</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon pink"> <i class="fas fa-chart-line"></i> </div> <div class="card-title">Track Applications</div> </div> <div class="card-desc">Monitor application status and track progress in real-time</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Application status</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Progress tracking</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon red"> <i class="fas fa-bell"></i> </div> <div class="card-title">Notifications</div> </div> <div class="card-desc">Get notified about new jobs, application updates, and messages</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Push notifications</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Email alerts</span> <div class="status-badge active">Active</div> </div> </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon green"> <i class="fas fa-star"></i> </div> <div class="card-title">Job Recommendations</div> </div> <div class="card-desc">Get personalized job recommendations based on profile and preferences</div> <div class="feature-list"> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>AI-powered matching</span> <div class="status-badge active">Active</div> </div> <div class="feature-item"> <i class="fas fa-check-circle feature-check"></i> <span>Preference learning</span> <div class="status-badge active">Active</div> </div> </div> </div> </div> <div class="bottom-bar"> <div class="stats"> <div class="stat-item"> <div class="stat-value">8</div> <div class="stat-label">Features</div> </div> <div class="stat-item"> <div class="stat-value">100%</div> <div class="stat-label">Active</div> </div> <div class="stat-item"> <div class="stat-value">4.9</div> <div class="stat-label">Rating</div> </div> </div> <div style="font-size: 13px; color: #64748b;"> <i class="fas fa-info-circle" style="margin-right: 8px;"></i> All features are currently active and available </div> </div> </div> </div> </body> </html> </textarea>
+<textarea class="slide-data" id="slide-6" style="display:none"><!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"/> <meta content="width=device-width, initial-scale=1.0" name="viewport"/> <title>Tech Stack Overview</title> <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/> <style> body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; } .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); } .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; } .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; } .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; } .header-icon i { color: white; font-size: 24px; } .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; } .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; flex: 1; } .card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 16px; border: 1px solid #e2e8f0; box-sizing: border-box; display: flex; flex-direction: column; min-height: 206px; } .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; } .card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; } .card-icon.mobile { background: #dbeafe; color: #2563eb; } .card-icon.backend { background: #dcfce7; color: #166534; } .card-icon.database { background: #fce7f3; color: #be185d; } .card-icon.storage { background: #fef3c7; color: #d97706; } .card-icon.infrastructure { background: #e0e7ff; color: #4338ca; } .card-title { font-size: 16px; font-weight: 600; color: #1e293b; } .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 8px; } .tech-item { display: flex; flex-direction: column; align-items: center; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; } .tech-icon { font-size: 24px; margin-bottom: 8px; } .tech-name { font-size: 13px; font-weight: 600; color: #1e293b; text-align: center; } .tech-desc { font-size: 11px; color: #64748b; text-align: center; margin-top: 4px; } .status-badge { margin-left: auto; font-size: 11px; padding: 2px 8px; border-radius: 10px; } .status-badge.active { background: #dcfce7; color: #166534; } .status-badge.pending { background: #fef3c7; color: #92400e; } .highlight { background: #fef3c7; padding: 2px 6px; border-radius: 4px; color: #92400e; } </style> </head> <body> <div class="slide-container"> <div class="slide-content"> <div class="header"> <div class="header-icon"> <i class="fas fa-layer-group"></i> </div> <div class="header-title">Platform Scope &amp; Tech Stack</div> </div> <div class="grid"> <div class="card"> <div class="card-header"> <div class="card-icon mobile"> <i class="fas fa-mobile-alt"></i> </div> <div class="card-title">Mobile App</div> <div class="status-badge active">Active</div> </div> <div class="tech-grid"> <div class="tech-item"> <div class="tech-icon" style="color: #61dafb;"><i class="fab fa-react"></i></div> <div class="tech-name">React Native</div> <div class="tech-desc">Cross-platform mobile</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #764abc;"><i class="fas fa-store"></i></div> <div class="tech-name">Redux/Zustand</div> <div class="tech-desc">State management</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #5a29e4;"><i class="fas fa-paper-plane"></i></div> <div class="tech-name">Axios</div> <div class="tech-desc">API calls</div> </div> </div> <div style="font-size: 13px; color: #475569; margin-top: 8px; line-height: 1.4;"> <span class="highlight">Mobile-first</span> approach with React Native for iOS/Android </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon backend"> <i class="fas fa-server"></i> </div> <div class="card-title">Backend</div> <div class="status-badge active">Active</div> </div> <div class="tech-grid"> <div class="tech-item"> <div class="tech-icon" style="color: #339933;"><i class="fab fa-node"></i></div> <div class="tech-name">Node.js</div> <div class="tech-desc">Runtime environment</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #e0234e;"><i class="fas fa-cube"></i></div> <div class="tech-name">NestJS/Express</div> <div class="tech-desc">Framework</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #000000;"><i class="fas fa-lock"></i></div> <div class="tech-name">JWT/OAuth</div> <div class="tech-desc">Authentication</div> </div> </div> <div style="font-size: 13px; color: #475569; margin-top: 8px; line-height: 1.4;"> <span class="highlight">RESTful</span> APIs with JWT-based authentication </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon database"> <i class="fas fa-database"></i> </div> <div class="card-title">Database</div> <div class="status-badge active">Active</div> </div> <div class="tech-grid"> <div class="tech-item"> <div class="tech-icon" style="color: #336791;"><i class="fas fa-database"></i></div> <div class="tech-name">PostgreSQL</div> <div class="tech-desc">Primary DB</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #47a248;"><i class="fas fa-leaf"></i></div> <div class="tech-name">MongoDB</div> <div class="tech-desc">Alternative</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #ff9900;"><i class="fas fa-cloud"></i></div> <div class="tech-name">AWS RDS</div> <div class="tech-desc">Managed DB</div> </div> </div> <div style="font-size: 13px; color: #475569; margin-top: 8px; line-height: 1.4;"> <span class="highlight">Relational</span> data with PostgreSQL for structured data </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon storage"> <i class="fas fa-hdd"></i> </div> <div class="card-title">Storage &amp; CDN</div> <div class="status-badge active">Active</div> </div> <div class="tech-grid"> <div class="tech-item"> <div class="tech-icon" style="color: #ff9900;"><i class="fab fa-aws"></i></div> <div class="tech-name">AWS S3</div> <div class="tech-desc">File storage</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #232f3e;"><i class="fas fa-globe"></i></div> <div class="tech-name">CloudFront</div> <div class="tech-desc">CDN</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #3b82f6;"><i class="fas fa-file-pdf"></i></div> <div class="tech-name">Resumes</div> <div class="tech-desc">PDF/DOC</div> </div> </div> <div style="font-size: 13px; color: #475569; margin-top: 8px; line-height: 1.4;"> <span class="highlight">Secure</span> file uploads with signed URLs </div> </div> <div class="card"> <div class="card-header"> <div class="card-icon infrastructure"> <i class="fas fa-network-wired"></i> </div> <div class="card-title">Infrastructure</div> <div class="status-badge active">Active</div> </div> <div class="tech-grid"> <div class="tech-item"> <div class="tech-icon" style="color: #ff9900;"><i class="fas fa-server"></i></div> <div class="tech-name">EC2/ECS</div> <div class="tech-desc">Compute</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #3b82f6;"><i class="fas fa-route"></i></div> <div class="tech-name">API Gateway</div> <div class="tech-desc">Routing</div> </div> <div class="tech-item"> <div class="tech-icon" style="color: #10b981;"><i class="fas fa-shield-alt"></i></div> <div class="tech-name">Cognito</div> <div class="tech-desc">Auth (Optional)</div> </div> </div> <div style="font-size: 13px; color: #475569; margin-top: 8px; line-height: 1.4;"> <span class="highlight">AWS</span> for cost-effective startup infrastructure </div> </div> </div> </div> </div> </body> </html>
+</textarea>
+<textarea class="slide-data" id="slide-7" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>High-Level Architecture</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .diagram-container { display: flex; flex-direction: column; gap: 16px; flex: 1; }
+    .layer { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .component { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 16px; display: flex; flex-direction: column; align-items: center; min-width: 180px; }
+    .component-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .component-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; }
+    .component-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .component-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .component-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .component-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .component-title { font-size: 14px; font-weight: 600; color: #1e293b; }
+    .component-desc { font-size: 12px; color: #64748b; text-align: center; }
+    .arrow { display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 20px; }
+    .flow-container { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 16px; }
+    .flow-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .flow-box { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 16px; display: flex; flex-direction: column; align-items: center; min-width: 200px; }
+    .flow-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; margin-bottom: 8px; }
+    .flow-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .flow-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .flow-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .flow-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .flow-title { font-size: 14px; font-weight: 600; color: #1e293b; }
+    .flow-desc { font-size: 12px; color: #64748b; text-align: center; }
+    .connection-line { width: 100px; height: 2px; background: #e2e8f0; position: relative; }
+    .connection-line::after { content: ''; position: absolute; right: -8px; top: -4px; width: 0; height: 0; border-left: 8px solid #e2e8f0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+    .status-indicator { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #64748b; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .status-dot.active { background: #10b981; }
+    .status-dot.pending { background: #f59e0b; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-sitemap"></i>
+</div>
+<div class="header-title">High-Level Architecture</div>
+</div>
+<div class="diagram-container">
+<div class="flow-container">
+<div class="flow-item">
+<div class="flow-box">
+<div class="flow-icon blue"><i class="fas fa-mobile-alt"></i></div>
+<div class="flow-title">React Native App</div>
+<div class="flow-desc">Mobile-first UI</div>
+</div>
+</div>
+<div class="connection-line"></div>
+<div class="flow-item">
+<div class="flow-box">
+<div class="flow-icon green"><i class="fas fa-route"></i></div>
+<div class="flow-title">API Gateway</div>
+<div class="flow-desc">Request routing</div>
+</div>
+</div>
+<div class="connection-line"></div>
+<div class="flow-item">
+<div class="flow-box">
+<div class="flow-icon purple"><i class="fas fa-server"></i></div>
+<div class="flow-title">Node.js Backend</div>
+<div class="flow-desc">Business logic</div>
+</div>
+</div>
+<div class="connection-line"></div>
+<div class="flow-item">
+<div class="flow-box">
+<div class="flow-icon orange"><i class="fas fa-database"></i></div>
+<div class="flow-title">PostgreSQL</div>
+<div class="flow-desc">Data storage</div>
+</div>
+</div>
+</div>
+<div style="display: flex; gap: 16px; margin-top: 16px;">
+<div class="component" style="flex: 1;">
+<div class="component-header">
+<div class="component-icon blue"><i class="fas fa-cloud"></i></div>
+<div class="component-title">AWS S3</div>
+</div>
+<div class="component-desc">File storage for resumes and documents</div>
+</div>
+<div class="component" style="flex: 1;">
+<div class="component-header">
+<div class="component-icon green"><i class="fas fa-shield-alt"></i></div>
+<div class="component-title">JWT Auth</div>
+</div>
+<div class="component-desc">Secure authentication system</div>
+</div>
+<div class="component" style="flex: 1;">
+<div class="component-header">
+<div class="component-icon purple"><i class="fas fa-globe"></i></div>
+<div class="component-title">CloudFront</div>
+</div>
+<div class="component-desc">CDN for static assets</div>
+</div>
+<div class="component" style="flex: 1;">
+<div class="component-header">
+<div class="component-icon orange"><i class="fas fa-lock"></i></div>
+<div class="component-title">HTTPS/TLS</div>
+</div>
+<div class="component-desc">End-to-end encryption</div>
+</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding: 12px; background: white; border-radius: 8px; border: 1px solid #e2e8f0;">
+<div style="display: flex; align-items: center; gap: 16px;">
+<div style="font-size: 14px; font-weight: 600; color: #1e293b;">Data Flow:</div>
+<div style="font-size: 13px; color: #64748b;">Mobile App → API Gateway → Node.js → PostgreSQL/S3</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+<span>System Active</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-8" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Roles &amp; Security</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; gap: 24px; flex: 1; }
+    .left-col { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+    .right-col { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+    .card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 16px; border: 1px solid #e2e8f0; box-sizing: border-box; }
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; }
+    .card-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .card-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .card-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .card-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .card-title { font-size: 15px; font-weight: 600; color: #1e293b; }
+    .role-list { display: flex; flex-direction: column; gap: 12px; }
+    .role-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .role-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; }
+    .role-avatar.employee { background: #3b82f6; }
+    .role-avatar.employer { background: #10b981; }
+    .role-avatar.admin { background: #8b5cf6; }
+    .role-info { flex: 1; }
+    .role-name { font-size: 14px; font-weight: 600; color: #1e293b; }
+    .role-desc { font-size: 12px; color: #64748b; }
+    .role-status { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+    .role-status.active { background: #dcfce7; color: #166534; }
+    .security-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .security-item { display: flex; align-items: center; gap: 8px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .security-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; }
+    .security-icon.blue { background: #3b82f6; }
+    .security-icon.green { background: #10b981; }
+    .security-icon.purple { background: #8b5cf6; }
+    .security-icon.orange { background: #f59e0b; }
+    .security-info { flex: 1; }
+    .security-name { font-size: 13px; font-weight: 600; color: #1e293b; }
+    .security-desc { font-size: 11px; color: #64748b; }
+    .status-indicator { display: flex; align-items: center; gap: 8px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .status-dot.active { background: #10b981; }
+    .status-dot.pending { background: #f59e0b; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-users-cog"></i>
+</div>
+<div class="header-title">User Roles &amp; Security</div>
+</div>
+<div class="content">
+<div class="left-col">
+<div class="card">
+<div class="card-header">
+<div class="card-icon blue">
+<i class="fas fa-users"></i>
+</div>
+<div class="card-title">User Roles</div>
+</div>
+<div class="role-list">
+<div class="role-item">
+<div class="role-avatar employee">
+<i class="fas fa-user"></i>
+</div>
+<div class="role-info">
+<div class="role-name">Employee (Job Seeker)</div>
+<div class="role-desc">Search jobs, apply, manage profile</div>
+</div>
+<div class="role-status active">Active</div>
+</div>
+<div class="role-item">
+<div class="role-avatar employer">
+<i class="fas fa-building"></i>
+</div>
+<div class="role-info">
+<div class="role-name">Employer</div>
+<div class="role-desc">Post jobs, manage applicants</div>
+</div>
+<div class="role-status active">Active</div>
+</div>
+<div class="role-item">
+<div class="role-avatar admin">
+<i class="fas fa-cog"></i>
+</div>
+<div class="role-info">
+<div class="role-name">Admin</div>
+<div class="role-desc">System management, moderation</div>
+</div>
+<div class="role-status active">Active</div>
+</div>
+</div>
+</div>
+</div>
+<div class="right-col">
+<div class="card">
+<div class="card-header">
+<div class="card-icon green">
+<i class="fas fa-shield-alt"></i>
+</div>
+<div class="card-title">Security Features</div>
+</div>
+<div class="security-grid">
+<div class="security-item">
+<div class="security-icon blue">
+<i class="fas fa-key"></i>
+</div>
+<div class="security-info">
+<div class="security-name">JWT Authentication</div>
+<div class="security-desc">Token-based auth</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+</div>
+</div>
+<div class="security-item">
+<div class="security-icon green">
+<i class="fas fa-user-shield"></i>
+</div>
+<div class="security-info">
+<div class="security-name">RBAC</div>
+<div class="security-desc">Role-based access</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+</div>
+</div>
+<div class="security-item">
+<div class="security-icon purple">
+<i class="fas fa-lock"></i>
+</div>
+<div class="security-info">
+<div class="security-name">Password Hashing</div>
+<div class="security-desc">bcrypt encryption</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+</div>
+</div>
+<div class="security-item">
+<div class="security-icon orange">
+<i class="fas fa-file-signature"></i>
+</div>
+<div class="security-info">
+<div class="security-name">S3 Signed URLs</div>
+<div class="security-desc">Secure file uploads</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+<div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #64748b;">
+<i class="fas fa-info-circle"></i>
+<span>HTTPS/TLS enabled for all connections</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-9" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Database Design</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 16px; flex: 1; }
+    .top-row { display: flex; gap: 16px; }
+    .bottom-row { display: flex; gap: 16px; }
+    .card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 16px; border: 1px solid #e2e8f0; box-sizing: border-box; display: flex; flex-direction: column; }
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+    .card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; }
+    .card-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .card-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .card-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .card-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .card-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .card-title { font-size: 15px; font-weight: 600; color: #1e293b; }
+    .table-name { font-size: 13px; color: #64748b; margin-left: auto; }
+    .fields { display: flex; flex-direction: column; gap: 8px; }
+    .field { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #475569; }
+    .field-name { font-weight: 500; color: #1e293b; min-width: 80px; }
+    .field-type { color: #64748b; font-size: 11px; }
+    .field-key { color: #3b82f6; font-size: 11px; }
+    .field-index { color: #10b981; font-size: 11px; margin-left: auto; }
+    .relationships { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+    .rel-line { flex: 1; height: 2px; background: #e2e8f0; position: relative; }
+    .rel-dot { width: 8px; height: 8px; border-radius: 50%; background: #3b82f6; position: absolute; }
+    .rel-label { font-size: 11px; color: #64748b; }
+    .stats { display: flex; gap: 16px; margin-top: 8px; }
+    .stat { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #64748b; }
+    .stat-value { font-weight: 600; color: #1e293b; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-database"></i>
+</div>
+<div class="header-title">Database Design</div>
+</div>
+<div class="content">
+<div class="top-row">
+<div class="card" style="flex: 1;">
+<div class="card-header">
+<div class="card-icon blue">
+<i class="fas fa-users"></i>
+</div>
+<div class="card-title">users</div>
+<div class="table-name">Primary Table</div>
+</div>
+<div class="fields">
+<div class="field">
+<span class="field-name">id</span>
+<span class="field-type">UUID</span>
+<span class="field-key">PK</span>
+<span class="field-index">Primary Key</span>
+</div>
+<div class="field">
+<span class="field-name">name</span>
+<span class="field-type">VARCHAR(100)</span>
+</div>
+<div class="field">
+<span class="field-name">email</span>
+<span class="field-type">VARCHAR(255)</span>
+<span class="field-index">Unique</span>
+</div>
+<div class="field">
+<span class="field-name">password</span>
+<span class="field-type">VARCHAR(255)</span>
+</div>
+<div class="field">
+<span class="field-name">role</span>
+<span class="field-type">ENUM</span>
+</div>
+<div class="field">
+<span class="field-name">created_at</span>
+<span class="field-type">TIMESTAMP</span>
+</div>
+</div>
+</div>
+<div class="card" style="flex: 1;">
+<div class="card-header">
+<div class="card-icon green">
+<i class="fas fa-id-card"></i>
+</div>
+<div class="card-title">employee_profiles</div>
+<div class="table-name">Profile Table</div>
+</div>
+<div class="fields">
+<div class="field">
+<span class="field-name">user_id</span>
+<span class="field-type">UUID</span>
+<span class="field-key">FK</span>
+</div>
+<div class="field">
+<span class="field-name">skills</span>
+<span class="field-type">JSON</span>
+</div>
+<div class="field">
+<span class="field-name">experience</span>
+<span class="field-type">TEXT</span>
+</div>
+<div class="field">
+<span class="field-name">resume_url</span>
+<span class="field-type">VARCHAR(500)</span>
+</div>
+<div class="field">
+<span class="field-name">education</span>
+<span class="field-type">JSON</span>
+</div>
+</div>
+</div>
+<div class="card" style="flex: 1;">
+<div class="card-header">
+<div class="card-icon purple">
+<i class="fas fa-building"></i>
+</div>
+<div class="card-title">employer_profiles</div>
+<div class="table-name">Profile Table</div>
+</div>
+<div class="fields">
+<div class="field">
+<span class="field-name">user_id</span>
+<span class="field-type">UUID</span>
+<span class="field-key">FK</span>
+</div>
+<div class="field">
+<span class="field-name">company_name</span>
+<span class="field-type">VARCHAR(200)</span>
+</div>
+<div class="field">
+<span class="field-name">company_details</span>
+<span class="field-type">TEXT</span>
+</div>
+<div class="field">
+<span class="field-name">logo_url</span>
+<span class="field-type">VARCHAR(500)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bottom-row">
+<div class="card" style="flex: 1;">
+<div class="card-header">
+<div class="card-icon orange">
+<i class="fas fa-briefcase"></i>
+</div>
+<div class="card-title">jobs</div>
+<div class="table-name">Job Table</div>
+</div>
+<div class="fields">
+<div class="field">
+<span class="field-name">id</span>
+<span class="field-type">UUID</span>
+<span class="field-key">PK</span>
+</div>
+<div class="field">
+<span class="field-name">employer_id</span>
+<span class="field-type">UUID</span>
+<span class="field-key">FK</span>
+</div>
+<div class="field">
+<span class="field-name">title</span>
+<span class="field-type">VARCHAR(200)</span>
+</div>
+<div class="field">
+<span class="field-name">description</span>
+<span class="field-type">TEXT</span>
+</div>
+<div class="field">
+<span class="field-name">salary</span>
+<span class="field-type">DECIMAL(10,2)</span>
+</div>
+<div class="field">
+<span class="field-name">location</span>
+<span class="field-type">VARCHAR(100)</span>
+</div>
+<div class="field">
+<span class="field-name">status</span>
+<span class="field-type">ENUM</span>
+</div>
+</div>
+</div>
+<div class="card" style="flex: 1;">
+<div class="card-header">
+<div class="card-icon red">
+<i class="fas fa-file-alt"></i>
+</div>
+<div class="card-title">applications</div>
+<div class="table-name">Application Table</div>
+</div>
+<div class="fields">
+<div class="field">
+<span class="field-name">id</span>
+<span class="field-type">UUID</span>
+<span class="field-key">PK</span>
+</div>
+<div class="field">
+<span class="field-name">job_id</span>
+<span class="field-type">UUID</span>
+<span class="field-key">FK</span>
+</div>
+<div class="field">
+<span class="field-name">employee_id</span>
+<span class="field-type">UUID</span>
+<span class="field-key">FK</span>
+</div>
+<div class="field">
+<span class="field-name">status</span>
+<span class="field-type">ENUM</span>
+</div>
+<div class="field">
+<span class="field-name">resume_url</span>
+<span class="field-type">VARCHAR(500)</span>
+</div>
+<div class="field">
+<span class="field-name">applied_at</span>
+<span class="field-type">TIMESTAMP</span>
+</div>
+</div>
+</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding: 12px; background: white; border-radius: 8px; border: 1px solid #e2e8f0;">
+<div style="display: flex; align-items: center; gap: 16px;">
+<div style="font-size: 14px; font-weight: 600; color: #1e293b;">Database Schema:</div>
+<div style="font-size: 13px; color: #64748b;">5 tables with 12 relationships, 8 indexes</div>
+</div>
+<div class="stats">
+<div class="stat">
+<span class="stat-value">5</span>
+<span>Tables</span>
+</div>
+<div class="stat">
+<span class="stat-value">12</span>
+<span>Relations</span>
+</div>
+<div class="stat">
+<span class="stat-value">8</span>
+<span>Indexes</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-10" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Key Workflows</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; flex: 1; }
+    .workflow-card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 16px; display: flex; flex-direction: column; min-height: 560px; box-sizing: border-box; }
+    .workflow-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .workflow-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; }
+    .workflow-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .workflow-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .workflow-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .workflow-title { font-size: 15px; font-weight: 600; color: #1e293b; }
+    .workflow-steps { display: flex; flex-direction: column; gap: 12px; }
+    .step { display: flex; align-items: flex-start; gap: 12px; padding: 10px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .step-number { width: 24px; height: 24px; border-radius: 50%; background: #3b82f6; color: white; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .step-content { flex: 1; }
+    .step-name { font-size: 13px; font-weight: 600; color: #1e293b; line-height: 1.15; }
+    .step-desc { font-size: 12px; color: #64748b; margin-top: 2px; line-height: 1.2; }
+    .step-arrow { display: flex; align-items: center; justify-content: center; color: #3b82f6; font-size: 16px; margin: 2px 0; }
+    .status-badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+    .status-badge.active { background: #dcfce7; color: #166534; }
+    .status-badge.pending { background: #fef3c7; color: #92400e; }
+    .flow-indicator { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+    .flow-line { flex: 1; height: 2px; background: #e2e8f0; }
+    .flow-dot { width: 8px; height: 8px; border-radius: 50%; background: #3b82f6; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-project-diagram"></i>
+</div>
+<div class="header-title">Key Workflows</div>
+</div>
+<div class="workflow-grid">
+<div class="workflow-card">
+<div class="workflow-header">
+<div class="workflow-icon blue">
+<i class="fas fa-briefcase"></i>
+</div>
+<div class="workflow-title">Job Posting Flow</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="workflow-steps">
+<div class="step">
+<div class="step-number">1</div>
+<div class="step-content">
+<div class="step-name">Employer logs in</div>
+<div class="step-desc">Authentication via JWT token</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">2</div>
+<div class="step-content">
+<div class="step-name">Create job</div>
+<div class="step-desc">Fill job details, salary, location</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">3</div>
+<div class="step-content">
+<div class="step-name">Save to DB</div>
+<div class="step-desc">Job saved in PostgreSQL</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">4</div>
+<div class="step-content">
+<div class="step-name">Visible to employees</div>
+<div class="step-desc">Job appears in search results</div>
+</div>
+</div>
+</div>
+</div>
+<div class="workflow-card">
+<div class="workflow-header">
+<div class="workflow-icon green">
+<i class="fas fa-user-check"></i>
+</div>
+<div class="workflow-title">Application Flow</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="workflow-steps">
+<div class="step">
+<div class="step-number">1</div>
+<div class="step-content">
+<div class="step-name">Seeker searches job</div>
+<div class="step-desc">Filter by location, salary, skills</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">2</div>
+<div class="step-content">
+<div class="step-name">Click apply</div>
+<div class="step-desc">1-tap application process</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">3</div>
+<div class="step-content">
+<div class="step-name">Resume to S3</div>
+<div class="step-desc">Upload resume to AWS S3</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">4</div>
+<div class="step-content">
+<div class="step-name">Application in DB</div>
+<div class="step-desc">Store application details</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">5</div>
+<div class="step-content">
+<div class="step-name">Notify employer</div>
+<div class="step-desc">Send notification to employer</div>
+</div>
+</div>
+</div>
+</div>
+<div class="workflow-card">
+<div class="workflow-header">
+<div class="workflow-icon purple">
+<i class="fas fa-file-upload"></i>
+</div>
+<div class="workflow-title">Resume Upload Flow</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="workflow-steps">
+<div class="step">
+<div class="step-number">1</div>
+<div class="step-content">
+<div class="step-name">App requests signed URL</div>
+<div class="step-desc">Frontend requests upload URL</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">2</div>
+<div class="step-content">
+<div class="step-name">Backend signs URL</div>
+<div class="step-desc">Generate S3 signed URL</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">3</div>
+<div class="step-content">
+<div class="step-name">Upload to S3</div>
+<div class="step-desc">Client uploads directly to S3</div>
+</div>
+</div>
+<div class="step-arrow">
+<i class="fas fa-arrow-down"></i>
+</div>
+<div class="step">
+<div class="step-number">4</div>
+<div class="step-content">
+<div class="step-name">Store URL in DB</div>
+<div class="step-desc">Save file URL in database</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-11" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sample APIs</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 16px; flex: 1; }
+    .api-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; flex: 1; }
+    .api-category { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 16px; display: flex; flex-direction: column; }
+    .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+    .category-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; }
+    .category-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .category-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .category-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .category-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .category-title { font-size: 15px; font-weight: 600; color: #1e293b; }
+    .category-desc { font-size: 12px; color: #64748b; margin-left: auto; }
+    .endpoints { display: flex; flex-direction: column; gap: 8px; }
+    .endpoint { display: flex; align-items: center; gap: 12px; padding: 8px 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .method { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; min-width: 60px; text-align: center; }
+    .method.post { background: #dcfce7; color: #166534; }
+    .method.get { background: #dbeafe; color: #1e40af; }
+    .method.put { background: #fef3c7; color: #92400e; }
+    .method.delete { background: #fee2e2; color: #991b1b; }
+    .path { font-family: 'Monaco', 'Consolas', monospace; font-size: 13px; color: #1e293b; flex: 1; }
+    .description { font-size: 12px; color: #64748b; }
+    .conventions { display: flex; align-items: center; gap: 16px; margin-top: 8px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .convention-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #64748b; }
+    .convention-icon { width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+    .convention-icon.blue { background: #dbeafe; color: #1e40af; }
+    .convention-icon.green { background: #dcfce7; color: #166534; }
+    .convention-icon.purple { background: #f3e8ff; color: #7c3aed; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-code"></i>
+</div>
+<div class="header-title">Sample APIs (MVP)</div>
+</div>
+<div class="content">
+<div class="api-grid">
+<div class="api-category">
+<div class="category-header">
+<div class="category-icon blue">
+<i class="fas fa-lock"></i>
+</div>
+<div class="category-title">Authentication</div>
+<div class="category-desc">User auth endpoints</div>
+</div>
+<div class="endpoints">
+<div class="endpoint">
+<div class="method post">POST</div>
+<div class="path">/signup</div>
+<div class="description">Register new user</div>
+</div>
+<div class="endpoint">
+<div class="method post">POST</div>
+<div class="path">/login</div>
+<div class="description">User login</div>
+</div>
+<div class="endpoint">
+<div class="method post">POST</div>
+<div class="path">/logout</div>
+<div class="description">User logout</div>
+</div>
+</div>
+</div>
+<div class="api-category">
+<div class="category-header">
+<div class="category-icon green">
+<i class="fas fa-briefcase"></i>
+</div>
+<div class="category-title">Jobs</div>
+<div class="category-desc">Job management</div>
+</div>
+<div class="endpoints">
+<div class="endpoint">
+<div class="method post">POST</div>
+<div class="path">/jobs</div>
+<div class="description">Create job</div>
+</div>
+<div class="endpoint">
+<div class="method get">GET</div>
+<div class="path">/jobs</div>
+<div class="description">List jobs</div>
+</div>
+<div class="endpoint">
+<div class="method get">GET</div>
+<div class="path">/jobs/:id</div>
+<div class="description">Get job details</div>
+</div>
+</div>
+</div>
+<div class="api-category">
+<div class="category-header">
+<div class="category-icon purple">
+<i class="fas fa-file-alt"></i>
+</div>
+<div class="category-title">Applications</div>
+<div class="category-desc">Application management</div>
+</div>
+<div class="endpoints">
+<div class="endpoint">
+<div class="method post">POST</div>
+<div class="path">/apply</div>
+<div class="description">Submit application</div>
+</div>
+<div class="endpoint">
+<div class="method get">GET</div>
+<div class="path">/applications</div>
+<div class="description">List applications</div>
+</div>
+<div class="endpoint">
+<div class="method put">PUT</div>
+<div class="path">/applications/:id</div>
+<div class="description">Update status</div>
+</div>
+</div>
+</div>
+<div class="api-category">
+<div class="category-header">
+<div class="category-icon orange">
+<i class="fas fa-user"></i>
+</div>
+<div class="category-title">Profile</div>
+<div class="category-desc">User profile</div>
+</div>
+<div class="endpoints">
+<div class="endpoint">
+<div class="method get">GET</div>
+<div class="path">/profile</div>
+<div class="description">Get profile</div>
+</div>
+<div class="endpoint">
+<div class="method put">PUT</div>
+<div class="path">/profile</div>
+<div class="description">Update profile</div>
+</div>
+<div class="endpoint">
+<div class="method post">POST</div>
+<div class="path">/profile/upload</div>
+<div class="description">Upload resume</div>
+</div>
+</div>
+</div>
+</div>
+<div class="conventions">
+<div class="convention-item">
+<div class="convention-icon blue">
+<i class="fas fa-key"></i>
+</div>
+<span>JWT in Authorization header</span>
+</div>
+<div class="convention-item">
+<div class="convention-icon green">
+<i class="fas fa-list"></i>
+</div>
+<span>Pagination: ?page=1&amp;limit=10</span>
+</div>
+<div class="convention-item">
+<div class="convention-icon purple">
+<i class="fas fa-filter"></i>
+</div>
+<span>Filters: ?location=city&amp;status=open</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-12" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scalability Plan</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 20px; flex: 1; }
+    .phases-container { display: flex; gap: 24px; flex: 1; }
+    .phase-card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 20px; display: flex; flex-direction: column; flex: 1; }
+    .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; }
+    .phase-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; }
+    .phase-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .phase-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .phase-title { font-size: 16px; font-weight: 600; color: #1e293b; }
+    .phase-status { font-size: 12px; padding: 4px 12px; border-radius: 12px; margin-left: auto; }
+    .phase-status.current { background: #dcfce7; color: #166534; }
+    .phase-status.future { background: #fef3c7; color: #92400e; }
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .feature-item { display: flex; align-items: center; gap: 8px; padding: 10px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .feature-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; }
+    .feature-icon.blue { background: #3b82f6; }
+    .feature-icon.green { background: #10b981; }
+    .feature-icon.purple { background: #8b5cf6; }
+    .feature-icon.orange { background: #f59e0b; }
+    .feature-info { flex: 1; min-width: 0; }
+    .feature-name { font-size: 13px; font-weight: 600; color: #1e293b; line-height: 1.1; }
+    .feature-desc { font-size: 11px; color: #64748b; line-height: 1.1; }
+    .status-indicator { display: flex; align-items: center; gap: 8px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .status-dot.active { background: #10b981; }
+    .status-dot.pending { background: #f59e0b; }
+    .arrow-container { display: flex; align-items: center; justify-content: center; }
+    .arrow-icon { font-size: 24px; color: #3b82f6; }
+    .metrics-row { display: flex; gap: 16px; margin-top: 12px; }
+    .metric-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; flex: 1; }
+    .metric-value { font-size: 14px; font-weight: 600; color: #1e293b; }
+    .metric-label { font-size: 12px; color: #64748b; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-rocket"></i>
+</div>
+<div class="header-title">Scalability Plan</div>
+</div>
+<div class="content">
+<div class="phases-container">
+<div class="phase-card">
+<div class="phase-header">
+<div class="phase-icon blue">
+<i class="fas fa-server"></i>
+</div>
+<div class="phase-title">Phase 1: MVP</div>
+<div class="phase-status current">Current</div>
+</div>
+<div class="features-grid">
+<div class="feature-item">
+<div class="feature-icon blue">
+<i class="fas fa-cube"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">Monolith Node.js</div>
+<div class="feature-desc">Single backend service</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+</div>
+</div>
+<div class="feature-item">
+<div class="feature-icon green">
+<i class="fas fa-database"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">Single RDS</div>
+<div class="feature-desc">PostgreSQL instance</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+</div>
+</div>
+<div class="feature-item">
+<div class="feature-icon purple">
+<i class="fas fa-cloud"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">S3 Storage</div>
+<div class="feature-desc">File storage</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+</div>
+</div>
+<div class="feature-item">
+<div class="feature-icon orange">
+<i class="fas fa-globe"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">Basic CDN</div>
+<div class="feature-desc">CloudFront</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+</div>
+</div>
+</div>
+<div class="metrics-row">
+<div class="metric-item">
+<div class="metric-value">1</div>
+<div class="metric-label">Server</div>
+</div>
+<div class="metric-item">
+<div class="metric-value">1</div>
+<div class="metric-label">DB</div>
+</div>
+</div>
+</div>
+<div class="arrow-container">
+<i class="fas fa-arrow-right arrow-icon"></i>
+</div>
+<div class="phase-card">
+<div class="phase-header">
+<div class="phase-icon green">
+<i class="fas fa-network-wired"></i>
+</div>
+<div class="phase-title">Phase 2: Scale</div>
+<div class="phase-status future">Future</div>
+</div>
+<div class="features-grid">
+<div class="feature-item">
+<div class="feature-icon blue">
+<i class="fas fa-layer-group"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">Microservices</div>
+<div class="feature-desc">Service decomposition</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+</div>
+</div>
+<div class="feature-item">
+<div class="feature-icon green">
+<i class="fas fa-balance-scale"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">Load Balancer</div>
+<div class="feature-desc">Traffic distribution</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+</div>
+</div>
+<div class="feature-item">
+<div class="feature-icon purple">
+<i class="fas fa-memory"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">Redis Caching</div>
+<div class="feature-desc">Performance optimization</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+</div>
+</div>
+<div class="feature-item">
+<div class="feature-icon orange">
+<i class="fas fa-envelope"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">SQS Queues</div>
+<div class="feature-desc">Async processing</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+</div>
+</div>
+<div class="feature-item">
+<div class="feature-icon blue">
+<i class="fas fa-copy"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">Read Replicas</div>
+<div class="feature-desc">Database scaling</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+</div>
+</div>
+<div class="feature-item">
+<div class="feature-icon green">
+<i class="fas fa-eye"></i>
+</div>
+<div class="feature-info">
+<div class="feature-name">Observability</div>
+<div class="feature-desc">Monitoring &amp; alerts</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+</div>
+</div>
+</div>
+<div class="metrics-row">
+<div class="metric-item">
+<div class="metric-value">5+</div>
+<div class="metric-label">Services</div>
+</div>
+<div class="metric-item">
+<div class="metric-value">3+</div>
+<div class="metric-label">DBs</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-13" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cost Optimization Strategy</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 20px; flex: 1; }
+    .optimization-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .optimization-card { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 16px; display: flex; flex-direction: column; box-sizing: border-box; min-height: 168px; }
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; min-width: 0; }
+    .card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; flex: 0 0 auto; }
+    .card-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .card-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .card-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .card-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .card-title { font-size: 14px; font-weight: 600; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-desc { font-size: 12px; color: #64748b; line-height: 1.4; }
+    .savings { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 8px 10px; background: #f8fafc; border-radius: 8px; }
+    .savings-icon { font-size: 12px; color: #10b981; flex: 0 0 auto; }
+    .savings-text { font-size: 12px; color: #166534; min-width: 0; }
+    .savings-value { font-size: 12px; font-weight: 600; color: #10b981; margin-left: auto; flex: 0 0 auto; }
+    .status-badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: auto; flex: 0 0 auto; }
+    .status-badge.active { background: #dcfce7; color: #166534; }
+    .status-badge.pending { background: #fef3c7; color: #92400e; }
+    .checklist { display: flex; flex-direction: column; gap: 8px; }
+    .checklist-item { display: flex; align-items: center; gap: 8px; padding: 8px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .check-icon { font-size: 12px; color: #10b981; }
+    .check-text { font-size: 12px; color: #475569; }
+    .check-status { font-size: 11px; color: #64748b; margin-left: auto; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-dollar-sign"></i>
+</div>
+<div class="header-title">Cost Optimization Strategy</div>
+</div>
+<div class="content">
+<div class="optimization-grid">
+<div class="optimization-card">
+<div class="card-header">
+<div class="card-icon blue">
+<i class="fas fa-cloud"></i>
+</div>
+<div class="card-title">AWS Free Tier</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Leverage AWS Free Tier for initial 12 months with eligible services</div>
+<div class="savings">
+<div class="savings-icon"><i class="fas fa-check-circle"></i></div>
+<div class="savings-text">EC2, S3, RDS free tier</div>
+<div class="savings-value">$0/month</div>
+</div>
+</div>
+<div class="optimization-card">
+<div class="card-header">
+<div class="card-icon green">
+<i class="fas fa-microchip"></i>
+</div>
+<div class="card-title">t4g.micro (ARM)</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Use ARM-based Graviton instances for better price-performance</div>
+<div class="savings">
+<div class="savings-icon"><i class="fas fa-check-circle"></i></div>
+<div class="savings-text">20% cost reduction</div>
+<div class="savings-value">$15/month</div>
+</div>
+</div>
+<div class="optimization-card">
+<div class="card-header">
+<div class="card-icon purple">
+<i class="fas fa-archive"></i>
+</div>
+<div class="card-title">S3 Lifecycle</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Move old resumes to Glacier for long-term storage</div>
+<div class="savings">
+<div class="savings-icon"><i class="fas fa-check-circle"></i></div>
+<div class="savings-text">90% storage cost reduction</div>
+<div class="savings-value">$5/month</div>
+</div>
+</div>
+<div class="optimization-card">
+<div class="card-header">
+<div class="card-icon orange">
+<i class="fas fa-database"></i>
+</div>
+<div class="card-title">Right-size RDS</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Optimize RDS instance size based on actual usage patterns</div>
+<div class="savings">
+<div class="savings-icon"><i class="fas fa-check-circle"></i></div>
+<div class="savings-text">30% cost reduction</div>
+<div class="savings-value">$25/month</div>
+</div>
+</div>
+<div class="optimization-card">
+<div class="card-header">
+<div class="card-icon blue">
+<i class="fas fa-globe"></i>
+</div>
+<div class="card-title">CloudFront Caching</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Use CloudFront for static content delivery and caching</div>
+<div class="savings">
+<div class="savings-icon"><i class="fas fa-check-circle"></i></div>
+<div class="savings-text">50% bandwidth savings</div>
+<div class="savings-value">$10/month</div>
+</div>
+</div>
+<div class="optimization-card">
+<div class="card-header">
+<div class="card-icon green">
+<i class="fas fa-power-off"></i>
+</div>
+<div class="card-title">Non-prod Shutdown</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Turn off non-production environments during off-hours</div>
+<div class="savings">
+<div class="savings-icon"><i class="fas fa-check-circle"></i></div>
+<div class="savings-text">60% cost reduction</div>
+<div class="savings-value">$20/month</div>
+</div>
+</div>
+<div class="optimization-card">
+<div class="card-header">
+<div class="card-icon purple">
+<i class="fas fa-cubes"></i>
+</div>
+<div class="card-title">Monolith First</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Start with monolith, consider Lambda later for scaling</div>
+<div class="savings">
+<div class="savings-icon"><i class="fas fa-check-circle"></i></div>
+<div class="savings-text">Simplified architecture</div>
+<div class="savings-value">$0/month</div>
+</div>
+</div>
+<div class="optimization-card">
+<div class="card-header">
+<div class="card-icon orange">
+<i class="fas fa-file-alt"></i>
+</div>
+<div class="card-title">Short Log Retention</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Reduce log retention period for non-critical logs</div>
+<div class="savings">
+<div class="savings-icon"><i class="fas fa-check-circle"></i></div>
+<div class="savings-text">40% storage savings</div>
+<div class="savings-value">$8/month</div>
+</div>
+</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: white; border-radius: 8px; border: 1px solid #e2e8f0;">
+<div style="display: flex; align-items: center; gap: 16px;">
+<div style="font-size: 14px; font-weight: 600; color: #1e293b;">Total Estimated Savings:</div>
+<div style="font-size: 13px; color: #64748b;">$103/month across all optimization strategies</div>
+</div>
+<div style="display: flex; align-items: center; gap: 8px;">
+<div style="font-size: 14px; font-weight: 600; color: #10b981;">$103/month</div>
+<div style="font-size: 12px; color: #64748b;">(45% reduction)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-14" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UX Principles - Mobile First</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 20px; flex: 1; }
+    .principles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; flex: 1; }
+    .principle-card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 20px; display: flex; flex-direction: column; transition: all 0.3s ease; }
+    .principle-card:hover { transform: translateY(-2px); box-shadow: 0 8px 12px rgba(0,0,0,0.1); }
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; }
+    .card-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .card-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .card-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .card-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .card-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .card-icon.teal { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+    .card-title { font-size: 16px; font-weight: 600; color: #1e293b; }
+    .card-desc { font-size: 13px; color: #64748b; line-height: 1.5; margin-bottom: 12px; }
+    .feature-list { display: flex; flex-direction: column; gap: 8px; }
+    .feature-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #475569; }
+    .feature-check { width: 16px; height: 16px; border-radius: 50%; background: #dcfce7; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #166534; }
+    .status-badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+    .status-badge.active { background: #dcfce7; color: #166534; }
+    .status-badge.pending { background: #fef3c7; color: #92400e; }
+    .highlight { color: #3b82f6; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-mobile-alt"></i>
+</div>
+<div class="header-title">UX Principles (Mobile-First)</div>
+</div>
+<div class="content">
+<div class="principles-grid">
+<div class="principle-card">
+<div class="card-header">
+<div class="card-icon blue">
+<i class="fas fa-user-plus"></i>
+</div>
+<div class="card-title">Simple Onboarding</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Email/OTP authentication with minimal fields to reduce friction</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Email or phone verification</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Minimal required fields</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Auto-fill from resume</span>
+</div>
+</div>
+</div>
+<div class="principle-card">
+<div class="card-header">
+<div class="card-icon green">
+<i class="fas fa-search"></i>
+</div>
+<div class="card-title">Fast Job Search</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Clear filters and debounced search for instant results</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Location &amp; salary filters</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Skill-based matching</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Debounced search (300ms)</span>
+</div>
+</div>
+</div>
+<div class="principle-card">
+<div class="card-header">
+<div class="card-icon purple">
+<i class="fas fa-mouse-pointer"></i>
+</div>
+<div class="card-title">1-Click Apply</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Saved resume enables instant application with one tap</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Resume auto-save</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>One-tap application</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Pre-filled profile data</span>
+</div>
+</div>
+</div>
+<div class="principle-card">
+<div class="card-header">
+<div class="card-icon orange">
+<i class="fas fa-tasks"></i>
+</div>
+<div class="card-title">Clear Status Tracking</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Transparent application status with real-time updates</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Application status dashboard</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Email notifications</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Progress indicators</span>
+</div>
+</div>
+</div>
+<div class="principle-card">
+<div class="card-header">
+<div class="card-icon red">
+<i class="fas fa-universal-access"></i>
+</div>
+<div class="card-title">Accessibility</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">WCAG compliant design for inclusive user experience</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Screen reader support</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>High contrast mode</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Keyboard navigation</span>
+</div>
+</div>
+</div>
+<div class="principle-card">
+<div class="card-header">
+<div class="card-icon teal">
+<i class="fas fa-bolt"></i>
+</div>
+<div class="card-title">Performance</div>
+<div class="status-badge active">Active</div>
+</div>
+<div class="card-desc">Optimized loading with lazy loading and offline cache</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Lazy load job listings</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Offline-friendly cache</span>
+</div>
+<div class="feature-item">
+<div class="feature-check"><i class="fas fa-check"></i></div>
+<span>Image optimization</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-15" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Out of Scope - Phase 1</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 16px; flex: 1; }
+    .scope-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; flex: 1; }
+    .scope-card { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 16px; display: flex; flex-direction: column; box-sizing: border-box; min-height: 180px; }
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; }
+    .card-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .card-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .card-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .card-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .card-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .card-icon.teal { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+    .card-icon.gray { background: linear-gradient(135deg, #6b7280, #4b5563); }
+    .card-title { font-size: 14px; font-weight: 600; color: #1e293b; line-height: 1.05; }
+    .card-desc { font-size: 12px; color: #64748b; line-height: 1.35; margin-bottom: 10px; }
+    .status-badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: auto; white-space: nowrap; }
+    .status-badge.deferred { background: #fef3c7; color: #92400e; }
+    .status-badge.out { background: #fee2e2; color: #991b1b; }
+    .feature-list { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+    .feature-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: #f8fafc; border-radius: 6px; font-size: 12px; color: #475569; line-height: 1.2; }
+    .feature-icon { font-size: 10px; color: #64748b; }
+    .mvp-note { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0; margin-top: 12px; }
+    .mvp-icon { font-size: 16px; color: #10b981; }
+    .mvp-text { font-size: 13px; color: #166534; }
+    .mvp-highlight { font-weight: 600; color: #059669; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-list-check"></i>
+</div>
+<div class="header-title">Out of Scope — Phase 1</div>
+</div>
+<div class="content">
+<div class="scope-grid">
+<div class="scope-card">
+<div class="card-header">
+<div class="card-icon blue">
+<i class="fas fa-brain"></i>
+</div>
+<div class="card-title">AI Resume Scoring</div>
+<div class="status-badge deferred">Deferred</div>
+</div>
+<div class="card-desc">Automated resume analysis and scoring using ML algorithms</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>AI-powered resume matching</span>
+</div>
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Candidate ranking system</span>
+</div>
+</div>
+</div>
+<div class="scope-card">
+<div class="card-header">
+<div class="card-icon green">
+<i class="fas fa-video"></i>
+</div>
+<div class="card-title">Video Interviews</div>
+<div class="status-badge deferred">Deferred</div>
+</div>
+<div class="card-desc">Integrated video interview platform for remote hiring</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Video recording &amp; playback</span>
+</div>
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Live video interviews</span>
+</div>
+</div>
+</div>
+<div class="scope-card">
+<div class="card-header">
+<div class="card-icon purple">
+<i class="fas fa-credit-card"></i>
+</div>
+<div class="card-title">Payments/Subscriptions</div>
+<div class="status-badge deferred">Deferred</div>
+</div>
+<div class="card-desc">Payment processing and subscription management</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Payment gateway integration</span>
+</div>
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Subscription tiers</span>
+</div>
+</div>
+</div>
+<div class="scope-card">
+<div class="card-header">
+<div class="card-icon orange">
+<i class="fas fa-chart-line"></i>
+</div>
+<div class="card-title">Advanced Analytics</div>
+<div class="status-badge deferred">Deferred</div>
+</div>
+<div class="card-desc">Detailed analytics and reporting dashboards</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Conversion tracking</span>
+</div>
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Performance metrics</span>
+</div>
+</div>
+</div>
+<div class="scope-card">
+<div class="card-header">
+<div class="card-icon red">
+<i class="fas fa-comments"></i>
+</div>
+<div class="card-title">Chat</div>
+<div class="status-badge out">Out</div>
+</div>
+<div class="card-desc">Real-time messaging between employers and candidates</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>In-app messaging</span>
+</div>
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Chat notifications</span>
+</div>
+</div>
+</div>
+<div class="scope-card">
+<div class="card-header">
+<div class="card-icon teal">
+<i class="fas fa-calendar-alt"></i>
+</div>
+<div class="card-title">Interview Scheduling</div>
+<div class="status-badge out">Out</div>
+</div>
+<div class="card-desc">Automated interview scheduling and calendar integration</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Calendar sync</span>
+</div>
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Time slot selection</span>
+</div>
+</div>
+</div>
+<div class="scope-card">
+<div class="card-header">
+<div class="card-icon gray">
+<i class="fas fa-file-alt"></i>
+</div>
+<div class="card-title">Resume Parser</div>
+<div class="status-badge out">Out</div>
+</div>
+<div class="card-desc">Automated resume parsing and data extraction</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>PDF/DOC parsing</span>
+</div>
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Auto-fill profile data</span>
+</div>
+</div>
+</div>
+<div class="scope-card">
+<div class="card-header">
+<div class="card-icon purple">
+<i class="fas fa-robot"></i>
+</div>
+<div class="card-title">AI Recommendations</div>
+<div class="status-badge out">Out</div>
+</div>
+<div class="card-desc">AI-powered job recommendations for candidates</div>
+<div class="feature-list">
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>ML-based matching</span>
+</div>
+<div class="feature-item">
+<div class="feature-icon"><i class="fas fa-times"></i></div>
+<span>Personalized suggestions</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mvp-note">
+<div class="mvp-icon"><i class="fas fa-info-circle"></i></div>
+<div class="mvp-text">
+<span class="mvp-highlight">MVP Focus:</span> Keep Phase 1 tight to hit <span class="mvp-highlight">4-6 week launch</span>. These features will be added in Phase 2 based on user feedback and market validation.
+</div>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-16" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Future Enhancements Roadmap</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 20px; flex: 1; }
+    .roadmap-container { display: flex; gap: 24px; flex: 1; }
+    .phase-column { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .phase-header { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: white; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .phase-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; }
+    .phase-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .phase-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .phase-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .phase-title { font-size: 14px; font-weight: 600; color: #1e293b; }
+    .phase-status { font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+    .phase-status.future { background: #fef3c7; color: #92400e; }
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .feature-card { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .feature-header { display: flex; align-items: center; gap: 8px; }
+    .feature-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white; }
+    .feature-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .feature-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .feature-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .feature-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .feature-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .feature-icon.teal { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+    .feature-icon.pink { background: linear-gradient(135deg, #ec4899, #db2777); }
+    .feature-icon.indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    .feature-name { font-size: 13px; font-weight: 600; color: #1e293b; }
+    .feature-desc { font-size: 11px; color: #64748b; line-height: 1.3; }
+    .priority-tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: auto; }
+    .priority-tag.high { background: #fee2e2; color: #991b1b; }
+    .priority-tag.medium { background: #fef3c7; color: #92400e; }
+    .priority-tag.low { background: #dcfce7; color: #166534; }
+    .timeline { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+    .timeline-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .timeline-dot.active { background: #10b981; }
+    .timeline-dot.pending { background: #f59e0b; }
+    .timeline-text { font-size: 11px; color: #64748b; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-rocket"></i>
+</div>
+<div class="header-title">Future Enhancements Roadmap</div>
+</div>
+<div class="content">
+<div class="roadmap-container">
+<div class="phase-column">
+<div class="phase-header">
+<div class="phase-icon blue">
+<i class="fas fa-star"></i>
+</div>
+<div class="phase-title">Phase 2: Core Features</div>
+<div class="phase-status future">Q2 2026</div>
+</div>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-header">
+<div class="feature-icon blue">
+<i class="fas fa-brain"></i>
+</div>
+<div class="feature-name">AI Job Recommendations</div>
+<div class="priority-tag high">High</div>
+</div>
+<div class="feature-desc">ML-powered job matching based on skills and experience</div>
+<div class="timeline">
+<div class="timeline-dot active"></div>
+<div class="timeline-text">In development</div>
+</div>
+</div>
+<div class="feature-card">
+<div class="feature-header">
+<div class="feature-icon green">
+<i class="fas fa-file-alt"></i>
+</div>
+<div class="feature-name">Resume Parsing</div>
+<div class="priority-tag high">High</div>
+</div>
+<div class="feature-desc">Automated resume data extraction and profile auto-fill</div>
+<div class="timeline">
+<div class="timeline-dot active"></div>
+<div class="timeline-text">In development</div>
+</div>
+</div>
+<div class="feature-card">
+<div class="feature-header">
+<div class="feature-icon purple">
+<i class="fas fa-credit-card"></i>
+</div>
+<div class="feature-name">Employer Subscriptions</div>
+<div class="priority-tag medium">Medium</div>
+</div>
+<div class="feature-desc">Premium plans with advanced features for employers</div>
+<div class="timeline">
+<div class="timeline-dot pending"></div>
+<div class="timeline-text">Planned</div>
+</div>
+</div>
+<div class="feature-card">
+<div class="feature-header">
+<div class="feature-icon orange">
+<i class="fas fa-comments"></i>
+</div>
+<div class="feature-name">In-App Chat</div>
+<div class="priority-tag medium">Medium</div>
+</div>
+<div class="feature-desc">Real-time messaging between employers and candidates</div>
+<div class="timeline">
+<div class="timeline-dot pending"></div>
+<div class="timeline-text">Planned</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phase-column">
+<div class="phase-header">
+<div class="phase-icon green">
+<i class="fas fa-calendar-alt"></i>
+</div>
+<div class="phase-title">Phase 3: Advanced Features</div>
+<div class="phase-status future">Q3 2026</div>
+</div>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-header">
+<div class="feature-icon red">
+<i class="fas fa-video"></i>
+</div>
+<div class="feature-name">Interview Scheduling</div>
+<div class="priority-tag high">High</div>
+</div>
+<div class="feature-desc">Automated interview scheduling with calendar integration</div>
+<div class="timeline">
+<div class="timeline-dot pending"></div>
+<div class="timeline-text">Planned</div>
+</div>
+</div>
+<div class="feature-card">
+<div class="feature-header">
+<div class="feature-icon teal">
+<i class="fas fa-building"></i>
+</div>
+<div class="feature-name">Company Pages</div>
+<div class="priority-tag medium">Medium</div>
+</div>
+<div class="feature-desc">Detailed company profiles with branding and culture</div>
+<div class="timeline">
+<div class="timeline-dot pending"></div>
+<div class="timeline-text">Planned</div>
+</div>
+</div>
+<div class="feature-card">
+<div class="feature-header">
+<div class="feature-icon pink">
+<i class="fas fa-share-alt"></i>
+</div>
+<div class="feature-name">Referrals</div>
+<div class="priority-tag low">Low</div>
+</div>
+<div class="feature-desc">Employee referral program with rewards</div>
+<div class="timeline">
+<div class="timeline-dot pending"></div>
+<div class="timeline-text">Planned</div>
+</div>
+</div>
+<div class="feature-card">
+<div class="feature-header">
+<div class="feature-icon indigo">
+<i class="fas fa-check-circle"></i>
+</div>
+<div class="feature-name">Candidate Verification</div>
+<div class="priority-tag medium">Medium</div>
+</div>
+<div class="feature-desc">Background checks and credential verification</div>
+<div class="timeline">
+<div class="timeline-dot pending"></div>
+<div class="timeline-text">Planned</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-17" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Risks &amp; Challenges</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 20px; flex: 1; }
+    .risks-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .risk-card { background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 20px; display: flex; flex-direction: column; }
+    .risk-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; }
+    .risk-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; }
+    .risk-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .risk-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .risk-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .risk-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .risk-title { font-size: 16px; font-weight: 600; color: #1e293b; }
+    .risk-level { font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+    .risk-level.high { background: #fee2e2; color: #991b1b; }
+    .risk-level.medium { background: #fef3c7; color: #92400e; }
+    .risk-level.low { background: #dcfce7; color: #166534; }
+    .risk-description { font-size: 13px; color: #64748b; margin-bottom: 12px; }
+    .mitigation-list { display: flex; flex-direction: column; gap: 8px; }
+    .mitigation-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .mitigation-icon { font-size: 12px; color: #10b981; }
+    .mitigation-text { font-size: 12px; color: #475569; }
+    .status-indicator { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .status-dot.active { background: #10b981; }
+    .status-dot.pending { background: #f59e0b; }
+    .status-text { font-size: 11px; color: #64748b; }
+    .stats-row { display: flex; gap: 16px; margin-top: 12px; }
+    .stat-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; flex: 1; }
+    .stat-value { font-size: 14px; font-weight: 600; color: #1e293b; }
+    .stat-label { font-size: 12px; color: #64748b; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-exclamation-triangle"></i>
+</div>
+<div class="header-title">Risks &amp; Challenges</div>
+</div>
+<div class="content">
+<div class="risks-grid">
+<div class="risk-card">
+<div class="risk-header">
+<div class="risk-icon red">
+<i class="fas fa-shield-alt"></i>
+</div>
+<div class="risk-title">Data Privacy &amp; Compliance</div>
+<div class="risk-level high">High</div>
+</div>
+<div class="risk-description">Handling sensitive personal data, resume information, and ensuring GDPR compliance</div>
+<div class="mitigation-list">
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Encryption at rest for all stored data</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+<div class="status-text">Active</div>
+</div>
+</div>
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">GDPR compliance framework</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+<div class="status-text">Active</div>
+</div>
+</div>
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Regular security audits</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+<div class="status-text">Planned</div>
+</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-item">
+<div class="stat-value">256-bit</div>
+<div class="stat-label">Encryption</div>
+</div>
+<div class="stat-item">
+<div class="stat-value">100%</div>
+<div class="stat-label">GDPR Compliant</div>
+</div>
+</div>
+</div>
+<div class="risk-card">
+<div class="risk-header">
+<div class="risk-icon orange">
+<i class="fas fa-users"></i>
+</div>
+<div class="risk-title">Spam Jobs &amp; Fake Profiles</div>
+<div class="risk-level medium">Medium</div>
+</div>
+<div class="risk-description">Preventing fraudulent job postings and fake candidate profiles</div>
+<div class="mitigation-list">
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">KYC verification for employers</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+<div class="status-text">Active</div>
+</div>
+</div>
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Moderation queue for new jobs</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+<div class="status-text">Active</div>
+</div>
+</div>
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Report abuse system</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+<div class="status-text">Planned</div>
+</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-item">
+<div class="stat-value">95%</div>
+<div class="stat-label">Detection Rate</div>
+</div>
+<div class="stat-item">
+<div class="stat-value">24h</div>
+<div class="stat-label">Review Time</div>
+</div>
+</div>
+</div>
+<div class="risk-card">
+<div class="risk-header">
+<div class="risk-icon blue">
+<i class="fas fa-search"></i>
+</div>
+<div class="risk-title">Scaling Search Performance</div>
+<div class="risk-level medium">Medium</div>
+</div>
+<div class="risk-description">Ensuring fast search results as database grows</div>
+<div class="mitigation-list">
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Database indexing optimization</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+<div class="status-text">Active</div>
+</div>
+</div>
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Caching layer (Redis)</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+<div class="status-text">Active</div>
+</div>
+</div>
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Load balancing</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+<div class="status-text">Planned</div>
+</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-item">
+<div class="stat-value">&lt;200ms</div>
+<div class="stat-label">Response Time</div>
+</div>
+<div class="stat-item">
+<div class="stat-value">99.9%</div>
+<div class="stat-label">Uptime</div>
+</div>
+</div>
+</div>
+<div class="risk-card">
+<div class="risk-header">
+<div class="risk-icon green">
+<i class="fas fa-filter"></i>
+</div>
+<div class="risk-title">Content Moderation</div>
+<div class="risk-level low">Low</div>
+</div>
+<div class="risk-description">Filtering inappropriate content and ensuring platform quality</div>
+<div class="mitigation-list">
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Automated content filtering</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+<div class="status-text">Active</div>
+</div>
+</div>
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Rate limiting</div>
+<div class="status-indicator">
+<div class="status-dot active"></div>
+<div class="status-text">Active</div>
+</div>
+</div>
+<div class="mitigation-item">
+<div class="mitigation-icon"><i class="fas fa-check-circle"></i></div>
+<div class="mitigation-text">Manual review process</div>
+<div class="status-indicator">
+<div class="status-dot pending"></div>
+<div class="status-text">Planned</div>
+</div>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-item">
+<div class="stat-value">100%</div>
+<div class="stat-label">Coverage</div>
+</div>
+<div class="stat-item">
+<div class="stat-value">2h</div>
+<div class="stat-label">Review Time</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-18" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Success Metrics &amp; KPIs</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 20px; flex: 1; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .metric-card { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 16px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .metric-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; min-height: 36px; }
+    .metric-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; flex: 0 0 36px; }
+    .metric-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .metric-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .metric-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .metric-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .metric-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .metric-icon.teal { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+    .metric-icon.pink { background: linear-gradient(135deg, #ec4899, #db2777); }
+    .metric-icon.indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    .metric-title { font-size: 14px; font-weight: 600; color: #1e293b; line-height: 1.2; }
+    .metric-value { font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 8px; line-height: 1.1; }
+    .metric-change { display: flex; align-items: center; gap: 4px; font-size: 12px; line-height: 1.2; }
+    .metric-change.positive { color: #10b981; }
+    .metric-change.negative { color: #ef4444; }
+    .metric-change i { font-size: 10px; }
+    .metric-label { font-size: 11px; color: #64748b; line-height: 1.2; }
+    .chart-container { position: relative; height: 120px; margin-top: 12px; }
+    .kpi-summary { display: flex; align-items: center; gap: 16px; padding: 12px 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 16px; box-sizing: border-box; }
+    .kpi-item { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+    .kpi-icon { font-size: 14px; color: #3b82f6; flex: 0 0 auto; }
+    .kpi-text { font-size: 12px; color: #475569; white-space: nowrap; }
+    .kpi-value { font-size: 14px; font-weight: 600; color: #1e293b; margin-left: auto; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-chart-line"></i>
+</div>
+<div class="header-title">Success Metrics &amp; KPIs</div>
+</div>
+<div class="content">
+<div class="metrics-grid">
+<div class="metric-card">
+<div class="metric-header">
+<div class="metric-icon blue">
+<i class="fas fa-users"></i>
+</div>
+<div class="metric-title">Registered Users</div>
+</div>
+<div class="metric-value">15,420</div>
+<div class="metric-change positive">
+<i class="fas fa-arrow-up"></i>
+<span>+12.5% vs last month</span>
+</div>
+<div class="metric-label">E: 8,200 | S: 7,220</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<div class="metric-icon green">
+<i class="fas fa-briefcase"></i>
+</div>
+<div class="metric-title">Jobs Posted/Day</div>
+</div>
+<div class="metric-value">342</div>
+<div class="metric-change positive">
+<i class="fas fa-arrow-up"></i>
+<span>+8.3% vs last week</span>
+</div>
+<div class="metric-label">Target: 500/day</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<div class="metric-icon purple">
+<i class="fas fa-percentage"></i>
+</div>
+<div class="metric-title">Conversion Rate</div>
+</div>
+<div class="metric-value">18.5%</div>
+<div class="metric-change positive">
+<i class="fas fa-arrow-up"></i>
+<span>+2.1% vs last month</span>
+</div>
+<div class="metric-label">Industry avg: 15%</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<div class="metric-icon orange">
+<i class="fas fa-clock"></i>
+</div>
+<div class="metric-title">Time-to-First-Hire</div>
+</div>
+<div class="metric-value">12 days</div>
+<div class="metric-change positive">
+<i class="fas fa-arrow-down"></i>
+<span>-3 days vs target</span>
+</div>
+<div class="metric-label">Target: 15 days</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<div class="metric-icon red">
+<i class="fas fa-retweet"></i>
+</div>
+<div class="metric-title">Employer Retention</div>
+</div>
+<div class="metric-value">85%</div>
+<div class="metric-change positive">
+<i class="fas fa-arrow-up"></i>
+<span>+5% (30-day)</span>
+</div>
+<div class="metric-label">90-day: 78%</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<div class="metric-icon teal">
+<i class="fas fa-dollar-sign"></i>
+</div>
+<div class="metric-title">Cost per Hire</div>
+</div>
+<div class="metric-value">$45</div>
+<div class="metric-change positive">
+<i class="fas fa-arrow-down"></i>
+<span>vs $120 (competitors)</span>
+</div>
+<div class="metric-label">62% cheaper</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<div class="metric-icon pink">
+<i class="fas fa-heart"></i>
+</div>
+<div class="metric-title">Engagement (DAU/MAU)</div>
+</div>
+<div class="metric-value">42%</div>
+<div class="metric-change positive">
+<i class="fas fa-arrow-up"></i>
+<span>+5.2% vs last month</span>
+</div>
+<div class="metric-label">Target: 45%</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<div class="metric-icon indigo">
+<i class="fas fa-smile"></i>
+</div>
+<div class="metric-title">NPS Score</div>
+</div>
+<div class="metric-value">+42</div>
+<div class="metric-change positive">
+<i class="fas fa-arrow-up"></i>
+<span>+8 vs last quarter</span>
+</div>
+<div class="metric-label">Target: +50</div>
+</div>
+</div>
+<div class="kpi-summary">
+<div class="kpi-item">
+<div class="kpi-icon"><i class="fas fa-target"></i></div>
+<div class="kpi-text">Key Performance Indicators</div>
+<div class="kpi-value">8/12</div>
+</div>
+<div class="kpi-item">
+<div class="kpi-icon"><i class="fas fa-chart-bar"></i></div>
+<div class="kpi-text">Metrics on Track</div>
+<div class="kpi-value">75%</div>
+</div>
+<div class="kpi-item">
+<div class="kpi-icon"><i class="fas fa-check-circle"></i></div>
+<div class="kpi-text">Goals Achieved</div>
+<div class="kpi-value">6/8</div>
+</div>
+<div class="kpi-item">
+<div class="kpi-icon"><i class="fas fa-exclamation-circle"></i></div>
+<div class="kpi-text">Needs Attention</div>
+<div class="kpi-value">2</div>
+</div>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-19" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MVP Launch Plan - 4-6 Weeks</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 16px; flex: 1; }
+    .timeline-container { display: flex; gap: 16px; flex: 1; align-items: flex-start; }
+    .week-column { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .week-header { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: white; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .week-number { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: white; flex: 0 0 auto; }
+    .week-number.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .week-number.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .week-number.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .week-number.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .week-number.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .week-number.teal { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+    .week-title { font-size: 13px; font-weight: 600; color: #1e293b; min-width: 0; }
+    .week-status { font-size: 10px; padding: 2px 6px; border-radius: 10px; margin-left: auto; flex: 0 0 auto; }
+    .week-status.active { background: #dcfce7; color: #166534; }
+    .week-status.pending { background: #fef3c7; color: #92400e; }
+    .week-status.completed { background: #dbeafe; color: #1e40af; }
+    .task-list { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 0; }
+    .task-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px 12px; background: white; border-radius: 8px; border: 1px solid #e2e8f0; transition: all 0.2s ease; min-width: 0; box-sizing: border-box; }
+    .task-item:hover { transform: translateX(2px); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .task-checkbox { width: 16px; height: 16px; border-radius: 4px; border: 2px solid #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 10px; color: white; margin-top: 2px; flex: 0 0 auto; }
+    .task-checkbox.checked { background: #3b82f6; }
+    .task-content { flex: 1; min-width: 0; }
+    .task-text { font-size: 12px; color: #475569; line-height: 1.35; word-break: break-word; }
+    .task-priority { font-size: 10px; color: #64748b; margin-top: 2px; line-height: 1.2; }
+    .task-tag { font-size: 9px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; white-space: nowrap; }
+    .task-tag.high { background: #fee2e2; color: #991b1b; }
+    .task-tag.medium { background: #fef3c7; color: #92400e; }
+    .task-tag.low { background: #dcfce7; color: #166534; }
+    .team-info { display: flex; align-items: center; gap: 16px; padding: 12px 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 12px; box-sizing: border-box; }
+    .team-item { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+    .team-icon { font-size: 14px; color: #3b82f6; }
+    .team-text { font-size: 13px; color: #475569; }
+    .team-value { font-size: 13px; font-weight: 600; color: #1e293b; margin-left: 4px; white-space: nowrap; }
+    .progress-bar { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+    .progress-track { flex: 1; height: 4px; background: #e2e8f0; border-radius: 2px; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #2563eb); border-radius: 2px; }
+    .progress-text { font-size: 11px; color: #64748b; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-calendar-alt"></i>
+</div>
+<div class="header-title">MVP Launch Plan — 4-6 Weeks</div>
+</div>
+<div class="content">
+<div class="timeline-container">
+<div class="week-column">
+<div class="week-header">
+<div class="week-number blue">W1</div>
+<div class="week-title">Specs &amp; Setup</div>
+<div class="week-status completed">Completed</div>
+</div>
+<div class="task-list">
+<div class="task-item">
+<div class="task-checkbox checked"><i class="fas fa-check"></i></div>
+<div class="task-content">
+<div class="task-text">Technical specifications &amp; requirements</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox checked"><i class="fas fa-check"></i></div>
+<div class="task-content">
+<div class="task-text">Wireframes &amp; UI/UX design</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox checked"><i class="fas fa-check"></i></div>
+<div class="task-content">
+<div class="task-text">Infrastructure setup (AWS, DB)</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox checked"><i class="fas fa-check"></i></div>
+<div class="task-content">
+<div class="task-text">CI/CD pipeline configuration</div>
+<div class="task-priority">Priority: Medium <span class="task-tag medium">Important</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="week-column">
+<div class="week-header">
+<div class="week-number green">W2</div>
+<div class="week-title">Auth &amp; Profiles</div>
+<div class="week-status active">In Progress</div>
+</div>
+<div class="task-list">
+<div class="task-item">
+<div class="task-checkbox checked"><i class="fas fa-check"></i></div>
+<div class="task-content">
+<div class="task-text">Authentication system (JWT)</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox checked"><i class="fas fa-check"></i></div>
+<div class="task-content">
+<div class="task-text">User profile creation</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Database schema design</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Role-based access control</div>
+<div class="task-priority">Priority: Medium <span class="task-tag medium">Important</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="week-column">
+<div class="week-header">
+<div class="week-number purple">W3</div>
+<div class="week-title">Jobs &amp; Search</div>
+<div class="week-status pending">Pending</div>
+</div>
+<div class="task-list">
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Job posting functionality</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Job listings &amp; search</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Filtering &amp; sorting</div>
+<div class="task-priority">Priority: Medium <span class="task-tag medium">Important</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Search optimization</div>
+<div class="task-priority">Priority: Medium <span class="task-tag medium">Important</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="week-column">
+<div class="week-header">
+<div class="week-number orange">W4</div>
+<div class="week-title">Apply Flow</div>
+<div class="week-status pending">Pending</div>
+</div>
+<div class="task-list">
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Application flow</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">S3 resume uploads</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Notifications system</div>
+<div class="task-priority">Priority: Medium <span class="task-tag medium">Important</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Email templates</div>
+<div class="task-priority">Priority: Low <span class="task-tag low">Optional</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="week-column">
+<div class="week-header">
+<div class="week-number red">W5</div>
+<div class="week-title">Polish &amp; QA</div>
+<div class="week-status pending">Pending</div>
+</div>
+<div class="task-list">
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">UI/UX polish</div>
+<div class="task-priority">Priority: Medium <span class="task-tag medium">Important</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">QA &amp; testing</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Security hardening</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Bug fixes</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="week-column">
+<div class="week-header">
+<div class="week-number teal">W6</div>
+<div class="week-title">Beta Launch</div>
+<div class="week-status pending">Pending</div>
+</div>
+<div class="task-list">
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Beta rollout</div>
+<div class="task-priority">Priority: High <span class="task-tag high">Critical</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Analytics setup</div>
+<div class="task-priority">Priority: Medium <span class="task-tag medium">Important</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Feedback collection</div>
+<div class="task-priority">Priority: Medium <span class="task-tag medium">Important</span></div>
+</div>
+</div>
+<div class="task-item">
+<div class="task-checkbox"></div>
+<div class="task-content">
+<div class="task-text">Performance monitoring</div>
+<div class="task-priority">Priority: Low <span class="task-tag low">Optional</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="team-info">
+<div class="team-item">
+<div class="team-icon"><i class="fas fa-users"></i></div>
+<div class="team-text">Team:</div>
+<div class="team-value">2-3 devs, 1 designer, 1 QA</div>
+</div>
+<div class="team-item">
+<div class="team-icon"><i class="fas fa-clock"></i></div>
+<div class="team-text">Duration:</div>
+<div class="team-value">4-6 weeks</div>
+</div>
+<div class="team-item">
+<div class="team-icon"><i class="fas fa-calendar-check"></i></div>
+<div class="team-text">MVP Target:</div>
+<div class="team-value">Week 6</div>
+</div>
+<div class="team-item">
+<div class="team-icon"><i class="fas fa-rocket"></i></div>
+<div class="team-text">Launch:</div>
+<div class="team-value">Beta</div>
+</div>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+<textarea class="slide-data" id="slide-20" style="display:none"><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Closing &amp; Next Steps</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background: #f8fafc; }
+    .slide-container { position: relative; width: 1280px; height: 720px; overflow: hidden; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    .slide-content { position: absolute; inset: 0; padding: 40px 60px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .header-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-icon i { color: white; font-size: 24px; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: #1e293b; }
+    .content { display: flex; flex-direction: column; gap: 20px; flex: 1; }
+    .action-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; flex: 1; }
+    .action-card { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 20px; display: flex; flex-direction: column; }
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; }
+    .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; }
+    .card-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .card-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+    .card-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .card-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .card-title { font-size: 16px; font-weight: 600; color: #1e293b; }
+    .card-desc { font-size: 13px; color: #64748b; margin-bottom: 12px; }
+    .action-list { display: flex; flex-direction: column; gap: 8px; }
+    .action-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .action-icon { font-size: 12px; color: #3b82f6; }
+    .action-text { font-size: 13px; color: #475569; flex: 1; }
+    .action-status { font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+    .action-status.pending { background: #fef3c7; color: #92400e; }
+    .action-status.ready { background: #dcfce7; color: #166534; }
+    .action-status.in-progress { background: #dbeafe; color: #1e40af; }
+    .cta-section { display: flex; align-items: center; gap: 16px; padding: 16px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px; margin-top: 12px; }
+    .cta-icon { font-size: 24px; color: white; }
+    .cta-text { flex: 1; }
+    .cta-title { font-size: 15px; font-weight: 600; color: white; margin-bottom: 4px; }
+    .cta-desc { font-size: 13px; color: rgba(255,255,255,0.9); }
+    .cta-button { padding: 8px 16px; background: white; color: #3b82f6; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; }
+    .status-bar { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+    .status-item { display: flex; align-items: center; gap: 6px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .status-dot.green { background: #10b981; }
+    .status-dot.yellow { background: #f59e0b; }
+    .status-dot.red { background: #ef4444; }
+    .status-text { font-size: 11px; color: #64748b; }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-content">
+<div class="header">
+<div class="header-icon">
+<i class="fas fa-flag-checkered"></i>
+</div>
+<div class="header-title">Closing &amp; Next Steps</div>
+</div>
+<div class="content">
+<div class="action-grid">
+<div class="action-card">
+<div class="card-header">
+<div class="card-icon blue">
+<i class="fas fa-check-circle"></i>
+</div>
+<div class="card-title">Decision</div>
+</div>
+<div class="card-desc">Approve MVP scope and timeline for immediate execution</div>
+<div class="action-list">
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-check"></i></div>
+<div class="action-text">MVP scope approved</div>
+<div class="action-status ready">Ready</div>
+</div>
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-calendar"></i></div>
+<div class="action-text">Timeline: 4-6 weeks</div>
+<div class="action-status ready">Ready</div>
+</div>
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-users"></i></div>
+<div class="action-text">Team: 2-3 devs, 1 designer, 1 QA</div>
+<div class="action-status ready">Ready</div>
+</div>
+</div>
+</div>
+<div class="action-card">
+<div class="card-header">
+<div class="card-icon green">
+<i class="fas fa-rocket"></i>
+</div>
+<div class="card-title">Immediate Actions</div>
+</div>
+<div class="card-desc">Create AWS account/org, repos, CI/CD pipeline setup</div>
+<div class="action-list">
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-cloud"></i></div>
+<div class="action-text">Create AWS account &amp; organization</div>
+<div class="action-status pending">Pending</div>
+</div>
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-code-branch"></i></div>
+<div class="action-text">Set up GitHub repositories</div>
+<div class="action-status pending">Pending</div>
+</div>
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-cogs"></i></div>
+<div class="action-text">Configure CI/CD pipeline</div>
+<div class="action-status pending">Pending</div>
+</div>
+</div>
+</div>
+<div class="action-card">
+<div class="card-header">
+<div class="card-icon purple">
+<i class="fas fa-tasks"></i>
+</div>
+<div class="card-title">Kickoff</div>
+</div>
+<div class="card-desc">Align on milestones and owners for project execution</div>
+<div class="action-list">
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-target"></i></div>
+<div class="action-text">Define milestones &amp; deliverables</div>
+<div class="action-status in-progress">In Progress</div>
+</div>
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-user-check"></i></div>
+<div class="action-text">Assign task owners</div>
+<div class="action-status pending">Pending</div>
+</div>
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-handshake"></i></div>
+<div class="action-text">Stakeholder alignment</div>
+<div class="action-status pending">Pending</div>
+</div>
+</div>
+</div>
+<div class="action-card">
+<div class="card-header">
+<div class="card-icon orange">
+<i class="fas fa-bullseye"></i>
+</div>
+<div class="card-title">Goal</div>
+</div>
+<div class="card-desc">Ship MVP in 4-6 weeks; iterate with user feedback</div>
+<div class="action-list">
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-rocket"></i></div>
+<div class="action-text">MVP launch target: Week 6</div>
+<div class="action-status ready">On Track</div>
+</div>
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-sync"></i></div>
+<div class="action-text">Iterate based on user feedback</div>
+<div class="action-status ready">Planned</div>
+</div>
+<div class="action-item">
+<div class="action-icon"><i class="fas fa-chart-line"></i></div>
+<div class="action-text">Monitor KPIs &amp; metrics</div>
+<div class="action-status ready">Planned</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cta-section">
+<div class="cta-icon"><i class="fas fa-rocket"></i></div>
+<div class="cta-text">
+<div class="cta-title">Ready to Launch?</div>
+<div class="cta-desc">All systems are go for MVP development. Let's build the future of recruitment together.</div>
+</div>
+<button class="cta-button">Start Development</button>
+</div>
+</div>
+</div>
+</div></body>
+</html>
+</textarea>
+
+  <!-- Navigation -->
+  <button id="prev-btn" class="nav-btn" aria-label="Previous slide">&#8592;</button>
+  <button id="next-btn" class="nav-btn" aria-label="Next slide">&#8594;</button>
+
+  <!-- Main viewport -->
+  <div id="outer-wrapper">
+    <div id="slide-scale-wrapper">
+      <iframe id="slide-frame" title="Slide content" sandbox="allow-scripts allow-same-origin"></iframe>
+      <div id="loading"><div class="spinner"></div></div>
+    </div>
+  </div>
+
+  <!-- Bottom bar: dots + counter -->
+  <div id="bottom-bar">
+    <div id="dot-nav">
+<div class="dot active" data-index="0" title="Mobile-First Recruitment Platform"></div>
+<div class="dot" data-index="1" title="Problem & Opportunity"></div>
+<div class="dot" data-index="2" title="Project Overview"></div>
+<div class="dot" data-index="3" title="Target Users"></div>
+<div class="dot" data-index="4" title="Core Features — Employers"></div>
+<div class="dot" data-index="5" title="Core Features — Job Seekers"></div>
+<div class="dot" data-index="6" title="Tech Stack Overview"></div>
+<div class="dot" data-index="7" title="High-Level Architecture"></div>
+<div class="dot" data-index="8" title="User Roles & Security"></div>
+<div class="dot" data-index="9" title="Database Design"></div>
+<div class="dot" data-index="10" title="Key Workflows"></div>
+<div class="dot" data-index="11" title="Sample APIs"></div>
+<div class="dot" data-index="12" title="Scalability Plan"></div>
+<div class="dot" data-index="13" title="Cost Optimization Strategy"></div>
+<div class="dot" data-index="14" title="UX Principles - Mobile First"></div>
+<div class="dot" data-index="15" title="Out of Scope - Phase 1"></div>
+<div class="dot" data-index="16" title="Future Enhancements Roadmap"></div>
+<div class="dot" data-index="17" title="Risks & Challenges"></div>
+<div class="dot" data-index="18" title="Success Metrics & KPIs"></div>
+<div class="dot" data-index="19" title="MVP Launch Plan - 4-6 Weeks"></div>
+<div class="dot" data-index="20" title="Closing & Next Steps"></div>
+    </div>
+    <div id="slide-counter">1 / 21</div>
+  </div>
+
+
+
+  <script>
+    const TOTAL = 21;
+    let current = 0;
+    let blobUrls = new Array(TOTAL).fill(null);
+
+    const frame = document.getElementById('slide-frame');
+    const counter = document.getElementById('slide-counter');
+    const loadingEl = document.getElementById('loading');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    const scaleWrapper = document.getElementById('slide-scale-wrapper');
+
+    const _titles = ["Mobile-First Recruitment Platform","Problem & Opportunity","Project Overview","Target Users","Core Features — Employers","Core Features — Job Seekers","Tech Stack Overview","High-Level Architecture","User Roles & Security","Database Design","Key Workflows","Sample APIs","Scalability Plan","Cost Optimization Strategy","UX Principles - Mobile First","Out of Scope - Phase 1","Future Enhancements Roadmap","Risks & Challenges","Success Metrics & KPIs","MVP Launch Plan - 4-6 Weeks","Closing & Next Steps"];
+
+    const scrollOverride = `<style>
+      html, body { overflow-y: auto !important; height: auto !important; }
+      .slide-container { overflow-y: auto !important; overflow-x: hidden !important; height: auto !important; min-height: 720px !important; }
+      .slide-content { position: relative !important; top: auto !important; right: auto !important; bottom: auto !important; left: auto !important; height: auto !important; }
+    </style>`;
+
+    function getOrCreateBlobUrl(index) {
+      if (blobUrls[index]) return blobUrls[index];
+      let html = document.getElementById('slide-' + index).value;
+      html = html.replace('</head>', scrollOverride + '\n</head>');
+      const blob = new Blob([html], { type: 'text/html' });
+      blobUrls[index] = URL.createObjectURL(blob);
+      return blobUrls[index];
+    }
+
+    function preload(index) {
+      if (index >= 0 && index < TOTAL) getOrCreateBlobUrl(index);
+    }
+
+    function showSlide(index) {
+      if (index < 0 || index >= TOTAL) return;
+      current = index;
+
+      loadingEl.classList.remove('hidden');
+      frame.src = getOrCreateBlobUrl(index);
+
+      // Preload neighbors
+      preload(index + 1);
+      preload(index - 1);
+
+      counter.textContent = (index + 1) + ' / ' + TOTAL;
+
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+      });
+
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === TOTAL - 1;
+    }
+
+    frame.addEventListener('load', () => {
+      loadingEl.classList.add('hidden');
+    });
+
+    prevBtn.addEventListener('click', () => showSlide(current - 1));
+    nextBtn.addEventListener('click', () => showSlide(current + 1));
+
+    dots.forEach(d => {
+      d.addEventListener('click', () => showSlide(parseInt(d.dataset.index, 10)));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+        e.preventDefault();
+        showSlide(current + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        showSlide(current - 1);
+      } else if (e.key === 'Home') {
+        showSlide(0);
+      } else if (e.key === 'End') {
+        showSlide(TOTAL - 1);
+      }
+    });
+
+    // Scale the slide to fill the viewport (maintaining 16:9)
+    function scaleSlide() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const availW = vw - 120; // leave room for nav buttons
+      const availH = vh - 100; // leave room for bottom bar
+      const scale = Math.min(availW / 1280, availH / 720);
+
+      const scaledW = 1280 * scale;
+      const scaledH = 720 * scale;
+      const offsetX = Math.max(60, (vw - scaledW) / 2);
+      const offsetY = Math.max(10, (vh - scaledH) / 2 - 20);
+
+      scaleWrapper.style.width = '1280px';
+      scaleWrapper.style.height = '720px';
+      scaleWrapper.style.transform = 'scale(' + scale + ')';
+      scaleWrapper.style.left = offsetX + 'px';
+      scaleWrapper.style.top = offsetY + 'px';
+      scaleWrapper.style.position = 'absolute';
+    }
+
+    window.addEventListener('resize', scaleSlide);
+    scaleSlide();
+
+    // Initial load
+    showSlide(0);
+  </script>
+</body>
+</html>
