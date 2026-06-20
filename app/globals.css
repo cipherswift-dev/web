@@ -152,8 +152,8 @@ img, svg { display: block; max-width: 100%; }
 
 .brand { display: inline-flex; align-items: center; gap: 11px; }
 .brand-img { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(46,197,160,0.35)); }
-.brand-name { font-family: var(--font-brand); font-weight: 700; font-size: 21px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.04em; }
-.brand-accent { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.brand-name { font-family: var(--font-brand); font-weight: 700; font-size: 21px; text-transform: uppercase; letter-spacing: 0.04em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.brand-accent { color: inherit; }
 
 .nav-links { display: flex; align-items: center; gap: 2px; }
 .nav-item { position: relative; }
