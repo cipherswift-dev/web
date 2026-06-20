@@ -54,7 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     description: site.description,
   };
   return (
-    <html lang="en" className={`${jakarta.variable} ${inter.variable} ${chakra.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${inter.variable} ${chakra.variable}`}>
       <body>
         <script
           dangerouslySetInnerHTML={{
