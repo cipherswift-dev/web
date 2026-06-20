@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { services, stats, features, process, site } from "./_lib/content";
-import { Icon, ArrowRight, Bot, Sparkles, LineChart, ShieldCheck } from "./_lib/icons";
+import { Icon, ArrowRight, Bot, Sparkles, ShieldCheck } from "./_lib/icons";
 
 export default function Home() {
   return (
@@ -9,9 +9,9 @@ export default function Home() {
       <section className="hero">
         <div className="wrap hero-grid">
           <div>
-            <span className="eyebrow reveal"><span className="dot"></span>AI-first IT company</span>
+            <span className="eyebrow reveal"><span className="dot"></span>Cipher · Swift — secure code, shipped fast</span>
             <h1 className="reveal d1">
-              Build the future with <span className="grad">AI-driven</span> software
+              We decode complexity into <span className="grad">swift, secure software</span>
             </h1>
             <p className="hero-sub reveal d2">{site.description}</p>
             <div className="hero-cta reveal d3">
@@ -25,20 +25,21 @@ export default function Home() {
           </div>
 
           <div className="hero-visual reveal d2" aria-hidden="true">
-            <div className="hero-orb a"></div>
-            <div className="hero-orb b"></div>
-            <div className="hero-card one">
-              <span className="hc-icon"><Bot strokeWidth={1.8} /></span>
-              <div><b>AI Agents</b><span>Automating real work</span></div>
+            <div className="orb o1"></div>
+            <div className="orb o2"></div>
+            <div className="code-card glass">
+              <div className="cc-bar"><i></i><i></i><i></i><span>cipherswift.ts</span></div>
+              <pre>
+{``}<span className="c">{`// decode → build → ship`}</span>{`
+`}<span className="k">const</span>{` build = `}<span className="k">async</span>{` (idea) => {
+  `}<span className="k">const</span>{` plan = `}<span className="k">await</span>{` `}<span className="f">decode</span>{`(idea);
+  `}<span className="k">const</span>{` app  = `}<span className="k">await</span>{` `}<span className="f">cipher</span>{`(plan, `}<span className="s">{`"secure"`}</span>{`);
+  `}<span className="k">return</span>{` `}<span className="f">ship</span>{`(app, `}<span className="s">{`"swiftly"`}</span>{`);
+};`}
+              </pre>
             </div>
-            <div className="hero-card two">
-              <span className="hc-icon"><Sparkles strokeWidth={1.8} /></span>
-              <div><b>GenAI products</b><span>Prototype → production</span></div>
-            </div>
-            <div className="hero-card three">
-              <span className="hc-icon"><LineChart strokeWidth={1.8} /></span>
-              <div><b>Scalable</b><span>Built to grow</span></div>
-            </div>
+            <div className="chip c1"><Bot strokeWidth={1.9} /> AI Agents</div>
+            <div className="chip c2"><Sparkles strokeWidth={1.9} /> Shipped fast</div>
           </div>
         </div>
       </section>

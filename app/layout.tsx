@@ -50,6 +50,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={`${jakarta.variable} ${inter.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <div className="site-bg" aria-hidden="true">
+          <div className="aurora a1"></div>
+          <div className="aurora a2"></div>
+          <div className="aurora a3"></div>
+          <div className="bg-grid"></div>
+          <div className="bg-grain"></div>
+        </div>
         <Header />
         <main id="main">{children}</main>
         <Footer />

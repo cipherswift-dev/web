@@ -4,9 +4,9 @@
 export const site = {
   name: "Cipherswift",
   legalName: "Cipherswift Solutions",
-  tagline: "Building the future with AI-driven software",
+  tagline: "Decode complexity. Ship swiftly.",
   description:
-    "Cipherswift is an AI-first software company — we build AI agents, intelligent products, web & mobile apps, and help teams adopt AI through consulting and training.",
+    "Cipherswift is an AI-first software studio. We decode complex problems into secure, intelligent software — AI agents, products, web & mobile apps — and ship them fast.",
   siteUrl: "https://cipherswift.in",
   email: "cipherswift@gmail.com",
   location: "India",
