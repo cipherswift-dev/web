@@ -25,6 +25,7 @@ export default function AboutPage() {
             <div className="stats-row">
               {stats.map((st) => (
                 <div className="stat" key={st.label}>
+                  <span className="stat-ic"><Icon name={st.icon} strokeWidth={1.7} /></span>
                   <div className="num"><span data-target={st.target}>0</span><span className="suffix">{st.suffix}</span></div>
                   <div className="label">{st.label}</div>
                 </div>

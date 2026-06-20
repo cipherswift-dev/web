@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
 
         <div className="foot-bottom">
-          <span>© {new Date().getFullYear()} {site.legalName}. All rights reserved.</span>
+          <span>© 2016 {site.legalName}. All rights reserved.</span>
           <div className="links">
             <Link href="/contact">Contact</Link>
           </div>

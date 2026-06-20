@@ -25,7 +25,7 @@ export default function Home() {
           </div>
 
           <div className="hero-visual reveal d2" aria-hidden="true">
-            <div className="code-card glass">
+            <div className="code-card">
               <div className="cc-bar"><i></i><i></i><i></i><span>cipherswift.ts</span></div>
               <pre>
 {``}<span className="c">{`// decode → build → ship`}</span>{`
@@ -81,6 +81,7 @@ export default function Home() {
             <div className="stats-row">
               {stats.map((st) => (
                 <div className="stat" key={st.label}>
+                  <span className="stat-ic"><Icon name={st.icon} strokeWidth={1.7} /></span>
                   <div className="num"><span data-target={st.target}>0</span><span className="suffix">{st.suffix}</span></div>
                   <div className="label">{st.label}</div>
                 </div>
@@ -120,10 +121,13 @@ export default function Home() {
             <span className="eyebrow"><span className="dot"></span>How we work</span>
             <h2>A clear path from idea to scale</h2>
           </div>
-          <div className="grid-4">
+          <div className="grid-4 proc-grid">
             {process.map((p, i) => (
               <div className={`proc reveal d${(i % 4) + 1}`} key={p.step}>
-                <div className="step">{p.step}</div>
+                <div className="proc-top">
+                  <span className="card-icon"><Icon name={p.icon} strokeWidth={1.8} /></span>
+                  <span className="step">{p.step}</span>
+                </div>
                 <h3>{p.title}</h3>
                 <p>{p.text}</p>
               </div>

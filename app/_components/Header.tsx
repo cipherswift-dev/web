@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { nav, services } from "../_lib/content";
-import { ChevronDown, ArrowRight } from "../_lib/icons";
+import { ChevronDown } from "../_lib/icons";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
@@ -37,9 +38,7 @@ export default function Header() {
           </nav>
 
           <div className="nav-cta">
-            <Link className="btn btn-primary" href="/contact">
-              Start a project<ArrowRight />
-            </Link>
+            <ThemeToggle />
             <button className="hamburger" aria-label="Open menu" aria-expanded="false">
               <span className="hb"><i></i><i></i><i></i></span>
             </button>
@@ -51,7 +50,6 @@ export default function Header() {
         {nav.map((n) => (
           <Link key={n.href} href={n.href}>{n.label}</Link>
         ))}
-        <Link className="btn btn-primary" href="/contact">Start a project</Link>
       </div>
     </>
   );

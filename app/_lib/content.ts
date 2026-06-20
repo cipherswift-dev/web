@@ -72,10 +72,10 @@ export const services: Service[] = [
 ];
 
 export const stats = [
-  { target: 40, suffix: "+", label: "Projects delivered" },
-  { target: 25, suffix: "+", label: "Happy clients" },
-  { target: 15, suffix: "+", label: "AI solutions shipped" },
-  { target: 100, suffix: "%", label: "Client focused" },
+  { target: 40, suffix: "+", label: "Projects delivered", icon: "Rocket" },
+  { target: 25, suffix: "+", label: "Happy clients", icon: "Users" },
+  { target: 15, suffix: "+", label: "AI solutions shipped", icon: "Sparkles" },
+  { target: 100, suffix: "%", label: "Client focused", icon: "Target" },
 ];
 
 export const features = [
@@ -102,10 +102,10 @@ export const features = [
 ];
 
 export const process = [
-  { step: "01", title: "Discover", text: "We map the problem, your data and the outcomes that matter." },
-  { step: "02", title: "Design", text: "Architecture, UX and an AI approach you can trust." },
-  { step: "03", title: "Build", text: "Iterative delivery with working software every sprint." },
-  { step: "04", title: "Scale", text: "Hardening, observability and support as you grow." },
+  { step: "01", title: "Discover", icon: "Search", text: "We map the problem, your data and the outcomes that matter." },
+  { step: "02", title: "Design", icon: "PenTool", text: "Architecture, UX and an AI approach you can trust." },
+  { step: "03", title: "Build", icon: "Code2", text: "Iterative delivery with working software every sprint." },
+  { step: "04", title: "Scale", icon: "TrendingUp", text: "Hardening, observability and support as you grow." },
 ];
 
 export const nav = [
