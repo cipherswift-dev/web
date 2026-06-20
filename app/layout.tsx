@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter, Chakra_Petch } from "next/font/google";
 import "./globals.css";
 import { site } from "./_lib/content";
 import Header from "./_components/Header";
@@ -16,6 +16,12 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-inter",
+  display: "swap",
+});
+const chakra = Chakra_Petch({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-brand",
   display: "swap",
 });
 
@@ -48,7 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     description: site.description,
   };
   return (
-    <html lang="en" className={`${jakarta.variable} ${inter.variable}`}>
+    <html lang="en" className={`${jakarta.variable} ${inter.variable} ${chakra.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <div className="site-bg" aria-hidden="true">

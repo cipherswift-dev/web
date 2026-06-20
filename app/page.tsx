@@ -25,8 +25,6 @@ export default function Home() {
           </div>
 
           <div className="hero-visual reveal d2" aria-hidden="true">
-            <div className="orb o1"></div>
-            <div className="orb o2"></div>
             <div className="code-card glass">
               <div className="cc-bar"><i></i><i></i><i></i><span>cipherswift.ts</span></div>
               <pre>

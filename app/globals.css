@@ -152,7 +152,7 @@ img, svg { display: block; max-width: 100%; }
 
 .brand { display: inline-flex; align-items: center; gap: 11px; }
 .brand-img { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(46,197,160,0.35)); }
-.brand-name { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--ink); letter-spacing: -0.03em; }
+.brand-name { font-family: var(--font-brand); font-weight: 700; font-size: 21px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.04em; }
 .brand-accent { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 .nav-links { display: flex; align-items: center; gap: 2px; }
@@ -209,11 +209,16 @@ body.menu-open .mobile-panel { transform: translateY(0); opacity: 1; pointer-eve
 .hero-trust { display: flex; align-items: center; gap: 12px; margin-top: 34px; color: var(--muted); font-size: 14px; }
 .hero-trust .stars { color: #ffc24b; letter-spacing: 2px; }
 
-/* hero visual — glass code panel + floating chips + orbs */
+/* hero visual — glass code panel + floating chips + soft glow */
 .hero-visual { position: relative; height: clamp(360px, 42vw, 480px); }
-.orb { position: absolute; border-radius: 50%; filter: blur(8px); }
-.orb.o1 { width: 220px; height: 220px; right: 2%; top: 0; background: var(--grad); opacity: .55; }
-.orb.o2 { width: 130px; height: 130px; left: 0; bottom: 6%; background: var(--grad-2); opacity: .45; }
+.hero-visual::before {
+  content: ""; position: absolute; inset: -22% -16%; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(42% 42% at 72% 28%, rgba(46,197,160,0.30), transparent 72%),
+    radial-gradient(40% 40% at 30% 78%, rgba(39,169,225,0.24), transparent 74%),
+    radial-gradient(50% 50% at 50% 50%, rgba(164,208,55,0.12), transparent 75%);
+  filter: blur(24px);
+}
 .code-card {
   position: absolute; left: 6%; top: 12%; width: 86%; border-radius: 18px; padding: 16px 0 18px;
   box-shadow: var(--shadow); overflow: hidden;
