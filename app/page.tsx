@@ -107,7 +107,9 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="split-art reveal d2" aria-hidden="true">
+          <div className="split-art split-art--img reveal d2" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/ai-core.svg" alt="" />
             <div className="badge x"><ShieldCheck strokeWidth={1.8} /><b>Secure by design</b></div>
             <div className="badge y"><Sparkles strokeWidth={1.8} /><b>AI-native</b></div>
           </div>
