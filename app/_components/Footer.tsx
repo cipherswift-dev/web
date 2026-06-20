@@ -9,7 +9,8 @@ export default function Footer() {
         <div className="foot-top">
           <div className="foot-brand">
             <Link className="brand" href="/" aria-label="Cipherswift — home">
-              <span className="brand-mark" aria-hidden="true">C</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="brand-img" src="/logo-mark.png" alt="" width={42} height={42} />
               <span className="brand-name">Cipher<span className="brand-accent">swift</span></span>
             </Link>
             <p>{site.description}</p>

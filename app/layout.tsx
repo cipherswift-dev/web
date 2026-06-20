@@ -24,6 +24,7 @@ export const metadata: Metadata = {
   title: { default: `${site.name} — ${site.tagline}`, template: `%s — ${site.name}` },
   description: site.description,
   applicationName: site.name,
+  icons: { icon: "/logo-mark.png" },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -54,7 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="aurora a1"></div>
           <div className="aurora a2"></div>
           <div className="aurora a3"></div>
-          <div className="bg-grid"></div>
+          <div className="bg-dots"></div>
           <div className="bg-grain"></div>
         </div>
         <Header />
